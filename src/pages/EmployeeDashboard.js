@@ -51,8 +51,8 @@ const EmployeeDashboard = () => {
 
     // Demo queries
     const demoQueries = [
-      { id: 1, subject: 'Payment Query', message: 'When will my payment be processed?', status: 'Resolved', date: '2024-03-03' },
-      { id: 2, subject: 'Leave Request', message: 'I need to take leave next week', status: 'Pending', date: '2024-03-05' }
+      { id: 1, subject: 'Payment Query', message: 'When will my payment be processed?', status: 'Resolved', date: '2025-12-02' },
+      { id: 2, subject: 'Leave Request', message: 'I need to take leave next week', status: 'Pending', date: '2025-11-08' }
     ];
     setQueries(demoQueries);
   };
