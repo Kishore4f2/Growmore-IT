@@ -44,8 +44,8 @@ const EmployeeDashboard = () => {
 
     // Demo leave requests
     const demoLeaveRequests = [
-      { id: 1, startDate: '2024-03-15', endDate: '2024-03-17', reason: 'Personal', status: 'Pending', days: 3 },
-      { id: 2, startDate: '2024-02-10', endDate: '2024-02-12', reason: 'Sick Leave', status: 'Approved', days: 3 }
+      { id: 1, startDate: '2025-11-15', endDate: '2025-11-17', reason: 'Personal', status: 'Pending', days: 3 },
+      { id: 2, startDate: '2025-12-10', endDate: '2025-12-12', reason: 'Sick Leave', status: 'Approved', days: 3 }
     ];
     setLeaveRequests(demoLeaveRequests);
 
