@@ -1,0 +1,99 @@
+═══════════════════════════════════════════════════════════════
+  GROWMORE IT SERVICES - MANAGEMENT SYSTEM SETUP INSTRUCTIONS
+═══════════════════════════════════════════════════════════════
+
+STEP 1: INSTALL NODE.JS
+─────────────────────────
+Node.js is required to run this React application.
+
+1. Download Node.js from: https://nodejs.org/
+   - Choose the LTS (Long Term Support) version
+   - Download the Windows Installer (.msi file)
+
+2. Run the installer:
+   - Double-click the downloaded .msi file
+   - Follow the installation wizard
+   - Make sure "Add to PATH" is checked
+   - Complete the installation
+
+3. IMPORTANT: Close and reopen PowerShell/Command Prompt after installation
+
+4. Verify installation by running:
+   node --version
+   npm --version
+
+   Both should show version numbers if successful.
+
+
+STEP 2: INSTALL PROJECT DEPENDENCIES
+─────────────────────────────────────
+Open PowerShell in this folder and run:
+
+   npm install
+
+This will install all required packages (React, React Router, etc.)
+
+
+STEP 3: START THE APPLICATION
+──────────────────────────────
+Run the following command:
+
+   npm start
+
+The application will automatically open in your browser at:
+   http://localhost:3000
+
+
+STEP 4: USE THE APPLICATION
+───────────────────────────
+The application is in DEMO MODE - you can use any credentials:
+
+ADMIN LOGIN:
+   - URL: http://localhost:3000/admin/login
+   - Username: (any text)
+   - Password: (any text)
+
+EMPLOYEE LOGIN:
+   - URL: http://localhost:3000/employee/login
+   - Login ID: (any text)
+   - Password: (any text)
+
+INTERN LOGIN:
+   - URL: http://localhost:3000/intern/login
+   - Login ID: (any text)
+   - Password: (any text)
+
+
+FEATURES AVAILABLE:
+───────────────────
+✓ Employee Registration
+✓ Internship Application
+✓ Admin Dashboard
+✓ Employee Dashboard
+✓ Intern Dashboard
+✓ Task Management
+✓ Payment Tracking
+✓ Leave Requests
+✓ Query System
+✓ AI Chat Assistant
+✓ Document Generation
+✓ Reports & Analytics
+
+
+TROUBLESHOOTING:
+────────────────
+If npm is not recognized:
+   1. Make sure Node.js is installed
+   2. Restart your terminal/PowerShell
+   3. Restart your computer if needed
+   4. Check PATH environment variable
+
+If port 3000 is already in use:
+   - The app will ask to use a different port
+   - Or close the application using port 3000
+
+
+For detailed instructions, see INSTALL_NODEJS.md
+
+
+═══════════════════════════════════════════════════════════════
