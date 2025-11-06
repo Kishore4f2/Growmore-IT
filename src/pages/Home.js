@@ -9,10 +9,8 @@ const Home = () => {
         <div className="nav-content">
           <div className="logo">
             <div className="logo-icon">
-              <img src="/Growmore1.jpg" width="500" height="60" viewBox="0 0 40 40" fill="none">
-              </img>
+              <img src="/Growmore1.jpg" alt="Growmore IT" className="logo-img" />
             </div>
-            {/* <span className="logo-text">Growmore IT Services</span> */}
           </div>
           <div className="nav-links">
             <Link to="/employee/register" className="nav-link">Employee Registration</Link>
@@ -21,12 +19,16 @@ const Home = () => {
         </div>
       </nav>
 
-      <div className="hero-section">
+      <div
+        className="hero-section"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.55)), url('/Growmore.jpg')",
+        }}
+      >
         <div className="hero-content">
-          <h1 className="hero-title">
-            Advanced Management System
-            <span className="gradient-text">Powered by AI</span>
-          </h1>
+          <h1 className="hero-title">Growmore IT</h1>
+          <p className="hero-kicker gradient-text">Advanced Management System • Powered by AI</p>
           <p className="hero-subtitle">
             Streamline your business operations with our comprehensive management platform.
             Manage employees, internships, payments, tasks, and documents all in one place.
@@ -54,20 +56,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="hero-image">
-          <div className="floating-card card-1">
-            <div className="card-icon">📊</div>
-            <h3>Analytics</h3>
-          </div>
-          <div className="floating-card card-2">
-            <div className="card-icon">🤖</div>
-            <h3>AI Powered</h3>
-          </div>
-          <div className="floating-card card-3">
-            <div className="card-icon">⚡</div>
-            <h3>Automation</h3>
-          </div>
-        </div>
+        {/* Image column intentionally simplified to elegant hero background */}
       </div>
 
       <div className="features-section">
