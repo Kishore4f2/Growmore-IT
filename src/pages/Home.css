@@ -330,25 +330,25 @@
 .btn-primary {
   background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
   color: white;
-  box-shadow: 0 8px 25px rgba(79, 70, 229, 0.3);
+  box-shadow: 0 12px 40px rgba(79, 70, 229, 0.18);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .btn-primary:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 30px rgba(79, 70, 229, 0.4);
+  box-shadow: 0 18px 50px rgba(79, 70, 229, 0.28);
 }
 
 /* Light mode specific styling for hero buttons */
 .light .btn-primary {
   background: linear-gradient(135deg, #4338CA 0%, #5B21B6 100%);
   color: white;
-  box-shadow: 0 8px 25px rgba(67, 56, 202, 0.25);
+  box-shadow: 0 12px 40px rgba(67, 56, 202, 0.16);
   border: 1px solid rgba(79, 70, 229, 0.1);
 }
 
 .light .btn-primary:hover {
-  box-shadow: 0 12px 30px rgba(67, 56, 202, 0.35);
+  box-shadow: 0 18px 50px rgba(67, 56, 202, 0.24);
 }
 
 .btn-secondary {
@@ -678,30 +678,42 @@ section {
 }
 
 .internship-box {
-  background: var(--bg-secondary);
-  padding: 40px;
-  border-radius: 20px;
+  /* light default: clean white card */
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  color: #111827;
+  padding: 32px;
+  border-radius: 16px;
   text-align: center;
   cursor: pointer;
-  transition: all 0.3s ease;
-  border: 3px solid transparent;
+  transition: all 0.35s ease;
+  border: 1px solid rgba(15, 23, 42, 0.04);
+  box-shadow: 0 8px 24px rgba(16, 24, 40, 0.06);
 }
 
 .internship-box:hover {
-  transform: translateY(-8px);
+  transform: translateY(-8px) scale(1.01);
   border-color: var(--primary-color);
-  box-shadow: 0 12px 30px var(--shadow);
+  box-shadow: 0 18px 40px rgba(16,24,40,0.08);
 }
 
 .internship-box h3 {
-  font-size: 28px;
+  font-size: 26px;
   color: var(--text-primary);
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .internship-box p {
-  font-size: 16px;
+  font-size: 15px;
   color: var(--text-secondary);
+  opacity: 0.95;
+}
+
+/* Dark mode card style */
+.dark .internship-box {
+  background: linear-gradient(135deg, #0b1220 0%, #111827 100%);
+  color: var(--text-primary);
+  border: 1px solid rgba(255,255,255,0.03);
+  box-shadow: 0 10px 40px rgba(2,6,23,0.6);
 }
 
 .paid-internship-form {
@@ -740,19 +752,35 @@ section {
 }
 
 .form-control {
-  padding: 14px 18px;
-  border: 2px solid var(--border-color);
-  border-radius: 10px;
+  padding: 12px 16px;
+  border: 1px solid rgba(15,23,42,0.06);
+  border-radius: 12px;
   font-size: 16px;
   background: var(--bg-primary);
   color: var(--text-primary);
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
+  box-shadow: 0 8px 24px rgba(16,24,40,0.04);
+}
+
+.form-control::placeholder {
+  color: #9CA3AF;
 }
 
 .form-control:focus {
   outline: none;
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  box-shadow: 0 10px 30px rgba(79,70,229,0.12);
+  transform: translateY(-1px);
+}
+
+/* make file inputs match style */
+.form-control[type="file"] {
+  padding: 10px 12px;
+}
+
+/* textarea sizing */
+.form-control[rows] {
+  min-height: 120px;
 }
 
 .unpaid-internship-message {
