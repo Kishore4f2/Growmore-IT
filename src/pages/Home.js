@@ -12,6 +12,7 @@ const Home = () => {
   const [showLetterDownload, setShowLetterDownload] = useState(false);
   const [letterAuth, setLetterAuth] = useState({ dob: '', email: '' });
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showLoginSelection, setShowLoginSelection] = useState(false);
   const [loginType, setLoginType] = useState('intern');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
@@ -185,7 +186,7 @@ const Home = () => {
             <button onClick={() => { scrollToSection('services'); setMobileMenuOpen(false); }} className="nav-link">Services</button>
             <button onClick={() => { scrollToSection('internship'); setMobileMenuOpen(false); }} className="nav-link">Internship</button>
             <button onClick={() => { scrollToSection('contact'); setMobileMenuOpen(false); }} className="nav-link">Contact</button>
-            <Link to="/admin/login" className="nav-link" onClick={() => setMobileMenuOpen(false)}>Login</Link>
+            <button className="nav-link" onClick={() => { setShowLoginSelection(true); setMobileMenuOpen(false); }}>Login</button>
             <button onClick={() => { handleGetStarted(); setMobileMenuOpen(false); }} className="nav-link btn-get-started">Get Started</button>
           </div>
           <div className="nav-actions">
@@ -565,7 +566,42 @@ const Home = () => {
         </div>
       </footer>
 
-      {/* Login Modal */}
+      {/* Login Selection Modal */}
+      {showLoginSelection && (
+        <div className="modal-overlay" onClick={() => setShowLoginSelection(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setShowLoginSelection(false)}>×</button>
+            <h2>Choose Login Type</h2>
+            <div className="login-selection">
+              <button
+                className="login-option"
+                onClick={() => {
+                  setShowLoginSelection(false);
+                  navigate('/admin/login');
+                }}
+              >
+                <span className="emoji">1️⃣</span>
+                <span className="title">Admin Login</span>
+                <span className="description">For administrators and management</span>
+              </button>
+              
+              <button
+                className="login-option"
+                onClick={() => {
+                  setShowLoginSelection(false);
+                  setShowLoginModal(true);
+                }}
+              >
+                <span className="emoji">2️⃣</span>
+                <span className="title">Intern / Employee Login</span>
+                <span className="description">For interns and company employees</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Intern/Employee Login Modal */}
       {showLoginModal && (
         <div className="modal-overlay" onClick={() => setShowLoginModal(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>

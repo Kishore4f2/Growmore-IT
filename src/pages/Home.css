@@ -1116,6 +1116,64 @@ section {
   gap: 24px;
 }
 
+/* Login Selection Styles */
+.login-selection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.login-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 24px;
+  background: var(--bg-tertiary);
+  border: 2px solid transparent;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.login-option:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary-color);
+  background: var(--bg-primary);
+  box-shadow: 0 8px 25px var(--shadow);
+}
+
+.login-option .emoji {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.login-option .title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.login-option .description {
+  font-size: 14px;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+/* Light mode specific styling */
+.light .login-option {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.light .login-option:hover {
+  background: white;
+  border-color: var(--primary-color);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
 /* Animations */
 @keyframes fadeIn {
   from {
