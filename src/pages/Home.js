@@ -18,7 +18,8 @@ const Home = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    document.body.className = darkMode ? 'dark-mode' : 'light-mode';
+    // apply theme class names that match CSS (.dark / .light)
+    document.body.className = darkMode ? 'dark' : 'light';
   }, [darkMode]);
 
   const scrollToSection = (id) => {
@@ -190,10 +191,10 @@ const Home = () => {
             <button onClick={() => { handleGetStarted(); setMobileMenuOpen(false); }} className="nav-link btn-get-started">Get Started</button>
           </div>
           <div className="nav-actions">
-            <button className="theme-toggle" onClick={() => setDarkMode(!darkMode)}>
+            <button className="theme-toggle" style={{position: 'absolute', left: 16, top: 16}} onClick={() => setDarkMode(!darkMode)}>
               {darkMode ? '☀️' : '🌙'}
             </button>
-            <button className="mobile-menu-toggle" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+            <button className="mobile-menu-toggle" style={{position: 'absolute', right: 16, top: 16}} onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
               {mobileMenuOpen ? '✕' : '☰'}
             </button>
           </div>
@@ -202,14 +203,17 @@ const Home = () => {
 
       {/* Hero Section */}
       <section id="home" className="hero-section">
-        <div className="hero-background"  style={{
-    backgroundImage: "url('/Growmore.jpg')",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    filter: "blur(2px) brightness(0.7)",
-    zIndex: -1,
-  }}>
-        </div>
+        <div
+          className="hero-background"
+          style={{
+            backgroundImage: "url('/Growmore.jpg')",
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center top',
+            filter: 'none', /* show clear, unblurred image for impact */
+            zIndex: -1,
+          }}
+        />
         <div className="hero-content">
           <h1 className="hero-title">Empowering Growth Through Technology</h1>
           <p className="hero-subtitle">
