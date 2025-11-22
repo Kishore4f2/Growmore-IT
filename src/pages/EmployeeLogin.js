@@ -33,6 +33,22 @@ const EmployeeLogin = () => {
 
   return (
     <div className="login-container">
+      <nav className="navbar">
+        <div className="nav-content">
+          <div className="logo" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
+            <div className="logo-icon">
+              <img src="/Growmore1.jpg" alt="Growmore IT" className="logo-img" />
+            </div>
+          </div>
+          <div className="nav-links">
+            <button className="nav-link" onClick={() => navigate('/')}>Home</button>
+            <button className="nav-link" onClick={() => navigate('/internship/paid')}>Paid Internship</button>
+            <button className="nav-link" onClick={() => navigate('/internship/unpaid')}>Unpaid Internship</button>
+            <button className="nav-link" onClick={() => navigate('/inquiry')}>Inquiry</button>
+          </div>
+          <div className="nav-actions"></div>
+        </div>
+      </nav>
       <div className="login-card">
         <div className="login-header">
           <div className="login-icon">

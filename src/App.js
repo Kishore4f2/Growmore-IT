@@ -14,12 +14,20 @@ import InternApply from './pages/InternApply';
 import AdminDashboard from './pages/AdminDashboard';
 import EmployeeDashboard from './pages/EmployeeDashboard';
 import InternDashboard from './pages/InternDashboard';
+import PaidInternship from './pages/PaidInternship';
+import UnpaidInternship from './pages/UnpaidInternship';
+import Inquiry from './pages/Inquiry';
+import ApplyJob from './pages/ApplyJob';
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/internship/paid" element={<PaidInternship />} />
+        <Route path="/internship/unpaid" element={<UnpaidInternship />} />
+        <Route path="/inquiry" element={<Inquiry />} />
+        <Route path="/apply-job" element={<ApplyJob />} />
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/employee/login" element={<EmployeeLogin />} />
         <Route path="/intern/login" element={<InternLogin />} />

@@ -1,26 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Home.css';
 
 const Home = () => {
-  const [darkMode, setDarkMode] = useState(false);
   const [activeService, setActiveService] = useState(null);
   const [showInternshipOptions, setShowInternshipOptions] = useState(false);
-  const [internshipType, setInternshipType] = useState(null);
-  const [showGrowTogether, setShowGrowTogether] = useState(false);
-  const [growTogetherType, setGrowTogetherType] = useState(null);
+  const [showIdeaModal, setShowIdeaModal] = useState(false);
+  const [ideaForm, setIdeaForm] = useState({
+    idea: '',
+    benefit: '',
+    stack: []
+  });
   const [showLetterDownload, setShowLetterDownload] = useState(false);
   const [letterAuth, setLetterAuth] = useState({ dob: '', email: '' });
   const [showLoginModal, setShowLoginModal] = useState(false);
-  const [showLoginSelection, setShowLoginSelection] = useState(false);
   const [loginType, setLoginType] = useState('intern');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    // apply theme class names that match CSS (.dark / .light)
-    document.body.className = darkMode ? 'dark' : 'light';
-  }, [darkMode]);
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
@@ -140,20 +136,15 @@ const Home = () => {
   };
 
   const handlePaidInternship = () => {
-    setInternshipType('paid');
+    navigate('/internship/paid');
   };
 
   const handleUnpaidInternship = () => {
-    setInternshipType('unpaid');
+    navigate('/internship/unpaid');
   };
 
   const handleGetStarted = () => {
-    setShowGrowTogether(true);
-    scrollToSection('grow-together');
-  };
-
-  const handleGrowTogetherType = (type) => {
-    setGrowTogetherType(type);
+    scrollToSection('products');
   };
 
   const handleLetterDownload = () => {
@@ -171,8 +162,36 @@ const Home = () => {
     setActiveService(activeService === serviceId ? null : serviceId);
   };
 
+  const productImages = {
+    blood: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200&auto=format&fit=crop',
+    feedback: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=1200&auto=format&fit=crop',
+    inventory: 'https://images.unsplash.com/photo-1557821552-17105176677c?q=80&w=1200&auto=format&fit=crop',
+    tender: 'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1200&auto=format&fit=crop'
+  };
+
+  const serviceImages = {
+    1: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=1200&auto=format&fit=crop',
+    2: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=1200&auto=format&fit=crop',
+    3: 'https://images.unsplash.com/photo-1526378722484-bd91ca387e72?q=80&w=1200&auto=format&fit=crop',
+    4: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop',
+    5: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200&auto=format&fit=crop',
+    6: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200&auto=format&fit=crop',
+    7: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop',
+    8: 'https://images.unsplash.com/photo-1515169067865-5387ec356754?q=80&w=1200&auto=format&fit=crop',
+    9: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=1200&auto=format&fit=crop',
+    10:'https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1200&auto=format&fit=crop',
+    11:'https://images.unsplash.com/photo-1508385082359-f38ae991e8f2?q=80&w=1200&auto=format&fit=crop'
+  };
+
+  const aboutImage = 'https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=1200&auto=format&fit=crop';
+  const growImage = 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200&auto=format&fit=crop';
+  const owners = [
+    { name: 'Owner One', title: 'Owner', img: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop' },
+    { name: 'Owner Two', title: 'Owner', img: 'https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=800&auto=format&fit=crop' }
+  ];
+
   return (
-    <div className={`home-container ${darkMode ? 'dark' : 'light'}`}>
+    <div className="home-container dark">
       {/* Navbar */}
       <nav className="navbar">
         <div className="nav-content">
@@ -185,16 +204,14 @@ const Home = () => {
             <button onClick={() => { scrollToSection('home'); setMobileMenuOpen(false); }} className="nav-link">Home</button>
             <button onClick={() => { scrollToSection('about'); setMobileMenuOpen(false); }} className="nav-link">About</button>
             <button onClick={() => { scrollToSection('services'); setMobileMenuOpen(false); }} className="nav-link">Services</button>
+            <button onClick={() => { scrollToSection('products'); setMobileMenuOpen(false); }} className="nav-link">Products</button>
             <button onClick={() => { scrollToSection('internship'); setMobileMenuOpen(false); }} className="nav-link">Internship</button>
             <button onClick={() => { scrollToSection('contact'); setMobileMenuOpen(false); }} className="nav-link">Contact</button>
-            <button className="nav-link" onClick={() => { setShowLoginSelection(true); setMobileMenuOpen(false); }}>Login</button>
+            <button className="nav-link" onClick={() => { setShowLoginModal(true); setMobileMenuOpen(false); }}>Login</button>
             <button onClick={() => { handleGetStarted(); setMobileMenuOpen(false); }} className="nav-link btn-get-started">Get Started</button>
           </div>
           <div className="nav-actions">
-            <button className="theme-toggle" style={{position: 'absolute', left: 16, top: 16}} onClick={() => setDarkMode(!darkMode)}>
-              {darkMode ? '☀️' : '🌙'}
-            </button>
-            <button className="mobile-menu-toggle" style={{position: 'absolute', right: 16, top: 16}} onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+            <button className="mobile-menu-toggle" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
               {mobileMenuOpen ? '✕' : '☰'}
             </button>
           </div>
@@ -263,9 +280,7 @@ const Home = () => {
               </div>
             </div>
             <div className="about-image">
-              <div className="about-image-placeholder">
-                <div className="image-icon">🏢</div>
-              </div>
+              <div className="about-image-placeholder" style={{ backgroundImage: `url('${aboutImage}')`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
             </div>
           </div>
         </div>
@@ -286,6 +301,7 @@ const Home = () => {
                 onClick={() => handleServiceClick(service.id)}
               >
                 <div className="service-card-front">
+                  <div className="service-banner" style={{ backgroundImage: `url('${serviceImages[service.id]}')` }} />
                   <div className="service-icon">{service.icon}</div>
                   <h3 className="service-title">{service.title}</h3>
                   <p className="service-short-desc">{service.shortDesc}</p>
@@ -315,6 +331,44 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Products Demo Section */}
+      <section id="products" className="products-section">
+        <div className="container">
+          <h2 className="section-title">Product Demos</h2>
+          <p className="section-subtitle">Interactive, future-ready solutions with rich animations and elegant UI.</p>
+          <div className="product-grid">
+            <div className="product-card">
+              <div className="product-visual blood" style={{ backgroundImage: `url('${productImages.blood}')`, backgroundSize: 'cover', backgroundPosition: 'center' }}><span className="emoji">🩸</span></div>
+              <h3 className="product-title">Bloodbank Management Software</h3>
+              <p className="product-desc">Inventory, billing, and an advanced dashboard built for healthcare.</p>
+              <div className="product-meta">Inventory Management • Billing • Advance Dashboard</div>
+            </div>
+            <div className="product-card">
+              <div className="product-visual feedback" style={{ backgroundImage: `url('${productImages.feedback}')`, backgroundSize: 'cover', backgroundPosition: 'center' }}><span className="emoji">🗳️</span></div>
+              <h3 className="product-title">Advance Feedback Portal</h3>
+              <p className="product-desc">Collect, analyze, and act on feedback with real-time insights.</p>
+              <div className="product-meta">Analytics • Sentiment • Custom Workflows</div>
+            </div>
+            <div className="product-card">
+              <div className="product-visual inventory" style={{ backgroundImage: `url('${productImages.inventory}')`, backgroundSize: 'cover', backgroundPosition: 'center' }}><span className="emoji">📦</span></div>
+              <h3 className="product-title">Inventory Management (Web/App)</h3>
+              <p className="product-desc">Multi-platform stock, orders, suppliers, and smart alerts.</p>
+              <div className="product-meta">Web • Android • iOS</div>
+            </div>
+            <div className="product-card">
+              <div className="product-visual tender" style={{ backgroundImage: `url('${productImages.tender}')`, backgroundSize: 'cover', backgroundPosition: 'center' }}><span className="emoji">🏛️</span></div>
+              <h3 className="product-title">Government Tender</h3>
+              <p className="product-desc">Discover, manage, and apply with compliant documentation.</p>
+              <div className="product-meta">Discovery • Docs • Tracking</div>
+            </div>
+          </div>
+
+          <div className="product-cta">
+            <button className="btn btn-primary" onClick={() => setShowIdeaModal(true)}>✨ Add Your Project Idea</button>
+          </div>
+        </div>
+      </section>
+
       {/* Internship Section */}
       <section id="internship" className="internship-section">
         <div className="container">
@@ -340,62 +394,6 @@ const Home = () => {
               </div>
             </div>
           )}
-
-          {internshipType === 'paid' && (
-            <div className="paid-internship-form">
-              <div className="instant-notice">
-                <strong>Instant Internship – Get your login ID and password within 2 minutes!</strong>
-              </div>
-              <form className="internship-form">
-                <div className="form-group">
-                  <label>Select Duration:</label>
-                  <select className="form-control">
-                    <option>1 Month – ₹200</option>
-                    <option>3 Months – ₹500</option>
-                    <option>6 Months – ₹1000</option>
-                  </select>
-                </div>
-                <div className="form-group">
-                  <label>Full Name:</label>
-                  <input type="text" className="form-control" placeholder="Enter your full name" />
-                </div>
-                <div className="form-group">
-                  <label>College Name:</label>
-                  <input type="text" className="form-control" placeholder="Enter your college name" />
-                </div>
-                <div className="form-group">
-                  <label>Year of Graduation:</label>
-                  <input type="number" min="1900" max="2100" className="form-control" placeholder="e.g. 2024" />
-                </div>
-                <div className="form-group">
-                  <label>Email:</label>
-                  <input type="email" className="form-control" placeholder="Enter your email" />
-                </div>
-                <div className="form-group">
-                  <label>Contact Number:</label>
-                  <input type="tel" className="form-control" placeholder="Enter your contact number" />
-                </div>
-                <div className="form-group">
-                  <label>Date of Birth:</label>
-                  <input type="date" className="form-control" />
-                </div>
-                <div className="form-group">
-                  <label>Resume Upload:</label>
-                  <input type="file" className="form-control" accept=".pdf,.doc,.docx" />
-                </div>
-                <button type="submit" className="btn btn-primary">
-                  Submit & Proceed to Payment
-                </button>
-              </form>
-            </div>
-          )}
-
-          {internshipType === 'unpaid' && (
-            <div className="unpaid-internship-message">
-              <p>If the company has any openings, they'll contact the candidate directly.</p>
-              <p className="thank-you">Thanks for applying!</p>
-            </div>
-          )}
           <div className="letter-download-link">
             <button onClick={() => scrollToSection('letter-download')} className="btn btn-secondary">
               Download Offer Letter / Completion Letter
@@ -410,92 +408,19 @@ const Home = () => {
           <h2 className="section-title">LET'S GROW TOGETHER</h2>
           <div className="grow-together-content">
             <div className="grow-together-left">
-              <div className="grow-box" onClick={() => handleGrowTogetherType('inquiry')}>
+              <div className="grow-box" onClick={() => navigate('/inquiry')}>
                 <h3>1️⃣ Inquiry</h3>
                 <p>Have questions? Get in touch with us</p>
               </div>
-              <div className="grow-box" onClick={() => handleGrowTogetherType('job')}>
+              <div className="grow-box" onClick={() => navigate('/apply-job')}>
                 <h3>2️⃣ Apply for Job</h3>
                 <p>Join our team and grow with us</p>
               </div>
             </div>
             <div className="grow-together-right">
-              <div className="grow-image-placeholder">
-                <div className="image-icon">🚀</div>
-              </div>
+              <div className="grow-image-placeholder" style={{ backgroundImage: `url('${growImage}')`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
             </div>
           </div>
-
-          {growTogetherType === 'inquiry' && (
-            <div className="inquiry-form-container">
-              <h3>Inquiry Form</h3>
-              <form className="inquiry-form">
-                <div className="form-group">
-                  <label>Name:</label>
-                  <input type="text" className="form-control" placeholder="Enter your name" />
-                </div>
-                <div className="form-group">
-                  <label>Contact Number:</label>
-                  <input type="tel" className="form-control" placeholder="Enter your contact number" />
-                </div>
-                <div className="form-group">
-                  <label>Type of Enquiry:</label>
-                  <select className="form-control">
-                    <option>General Inquiry</option>
-                    <option>Service Inquiry</option>
-                    <option>Partnership</option>
-                    <option>Other</option>
-                  </select>
-                </div>
-                <div className="form-group">
-                  <label>Message:</label>
-                  <textarea className="form-control" rows="5" placeholder="Enter your message"></textarea>
-                </div>
-                <button type="submit" className="btn btn-primary">Submit Inquiry</button>
-              </form>
-            </div>
-          )}
-
-          {growTogetherType === 'job' && (
-            <div className="job-form-container">
-              <h3>Job Application Form</h3>
-              <form className="job-form">
-                <div className="form-group">
-                  <label>Full Name:</label>
-                  <input type="text" className="form-control" placeholder="Enter your full name" />
-                </div>
-                <div className="form-group">
-                  <label>Email:</label>
-                  <input type="email" className="form-control" placeholder="Enter your email" />
-                </div>
-                <div className="form-group">
-                  <label>Contact Number:</label>
-                  <input type="tel" className="form-control" placeholder="Enter your contact number" />
-                </div>
-                <div className="form-group">
-                  <label>College Name:</label>
-                  <input type="text" className="form-control" placeholder="Enter your college name" />
-                </div>
-                <div className="form-group">
-                  <label>Year of Graduation:</label>
-                  <input type="number" min="1900" max="2100" className="form-control" placeholder="e.g. 2024" />
-                </div>
-                <div className="form-group">
-                  <label>Position Applied For:</label>
-                  <input type="text" className="form-control" placeholder="Enter position" />
-                </div>
-                <div className="form-group">
-                  <label>Resume Upload:</label>
-                  <input type="file" className="form-control" accept=".pdf,.doc,.docx" />
-                </div>
-                <div className="form-group">
-                  <label>Cover Letter:</label>
-                  <textarea className="form-control" rows="4" placeholder="Enter your cover letter"></textarea>
-                </div>
-                <button type="submit" className="btn btn-primary">Submit Application</button>
-              </form>
-            </div>
-          )}
         </div>
       </section>
 
@@ -538,20 +463,15 @@ const Home = () => {
         <div className="container">
           <h2 className="section-title">Our Owners</h2>
           <div className="owners-grid">
-            <div className="owner-card">
-              <div className="owner-image">
-                <div className="owner-placeholder">👤</div>
+            {owners.map((o, idx) => (
+              <div key={idx} className="owner-card">
+                <div className="owner-image">
+                  <img src={o.img} alt={o.name} />
+                </div>
+                <h3 className="owner-name">{o.name}</h3>
+                <p className="owner-title">{o.title}</p>
               </div>
-              <h3 className="owner-name">Mahendra Singh Dhoni</h3>
-              <p className="owner-title">Owner</p>
-            </div>
-            <div className="owner-card">
-              <div className="owner-image">
-                <div className="owner-placeholder">👤</div>
-              </div>
-              <h3 className="owner-name">M.S. Dhoni</h3>
-              <p className="owner-title">Owner</p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -586,37 +506,64 @@ const Home = () => {
         </div>
       </footer>
 
-      {/* Login Selection Modal */}
-      {showLoginSelection && (
-        <div className="modal-overlay" onClick={() => setShowLoginSelection(false)}>
+      {/* Project Idea Modal */}
+      {showIdeaModal && (
+        <div className="modal-overlay" onClick={() => setShowIdeaModal(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={() => setShowLoginSelection(false)}>×</button>
-            <h2>Choose Login Type</h2>
-            <div className="login-selection">
-              <button
-                className="login-option"
-                onClick={() => {
-                  setShowLoginSelection(false);
-                  navigate('/admin/login');
-                }}
-              >
-                <span className="emoji">1️⃣</span>
-                <span className="title">Admin Login</span>
-                <span className="description">For administrators and management</span>
-              </button>
-              
-              <button
-                className="login-option"
-                onClick={() => {
-                  setShowLoginSelection(false);
-                  setShowLoginModal(true);
-                }}
-              >
-                <span className="emoji">2️⃣</span>
-                <span className="title">Intern / Employee Login</span>
-                <span className="description">For interns and company employees</span>
-              </button>
-            </div>
+            <button className="modal-close" onClick={() => setShowIdeaModal(false)}>×</button>
+            <h2>Submit Your Project Idea</h2>
+            <form
+              className="login-form"
+              onSubmit={(e) => {
+                e.preventDefault();
+                alert('✨ Project idea submitted!');
+                setShowIdeaModal(false);
+                setIdeaForm({ idea: '', benefit: '', stack: [] });
+              }}
+            >
+              <div className="form-group">
+                <label>Project Idea:</label>
+                <textarea
+                  className="form-control"
+                  rows="5"
+                  placeholder="👉 Please describe your project idea in detail."
+                  value={ideaForm.idea}
+                  onChange={(e) => setIdeaForm({ ...ideaForm, idea: e.target.value })}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label>How Will This Project Benefit the Company? (Optional)</label>
+                <textarea
+                  className="form-control"
+                  rows="4"
+                  placeholder="👉 Explain how your project can help improve productivity, revenue, or client experience."
+                  value={ideaForm.benefit}
+                  onChange={(e) => setIdeaForm({ ...ideaForm, benefit: e.target.value })}
+                />
+              </div>
+              <div className="form-group">
+                <label>Technology Stack:</label>
+                <div className="stack-options">
+                  {['Flutter','React','Node.js','Python','Java','PHP','MySQL','MongoDB'].map((tech) => (
+                    <label key={tech} className={`stack-chip ${ideaForm.stack.includes(tech) ? 'selected' : ''}`}>
+                      <input
+                        type="checkbox"
+                        checked={ideaForm.stack.includes(tech)}
+                        onChange={(e) => {
+                          const next = e.target.checked
+                            ? [...ideaForm.stack, tech]
+                            : ideaForm.stack.filter((t) => t !== tech);
+                          setIdeaForm({ ...ideaForm, stack: next });
+                        }}
+                      />
+                      <span>{tech}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+              <button type="submit" className="btn btn-primary">✨ Submit Your Project Idea</button>
+            </form>
           </div>
         </div>
       )}
