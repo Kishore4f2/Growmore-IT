@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AIChatbot from '../components/AIChatbot';
 import './Dashboard.css';
+import './Home.css';
+import { curatedBackgrounds } from '../assets/curatedBackgrounds';
 
 const EmployeeDashboard = () => {
   const navigate = useNavigate();
@@ -106,7 +108,11 @@ const EmployeeDashboard = () => {
   const inProgressTasks = tasks.filter(t => t.status === 'In Progress').length;
 
   return (
-    <div className="dashboard-container">
+    <div className="dashboard-container with-blur-bg">
+      <div className="section-bg">
+        <div className="section-bg__media" style={{ backgroundImage: `url('${curatedBackgrounds.pages.dashboardEmployee}')` }} />
+        <div className="section-bg__overlay" />
+      </div>
       <nav className="dashboard-nav">
         <div className="nav-brand">
           <h2>Growmore IT Services</h2>

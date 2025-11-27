@@ -1,13 +1,18 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Home.css';
+import { curatedBackgrounds } from '../assets/curatedBackgrounds';
 
 const UnpaidInternship = () => {
   const navigate = useNavigate();
 
   return (
     <div className="home-container dark">
-      <section className="internship-section neon-panel" style={{ marginTop: 24 }}>
+      <section className="internship-section neon-panel with-blur-bg" style={{ marginTop: 24 }}>
+        <div className="section-bg">
+          <div className="section-bg__media" style={{ backgroundImage: `url('${curatedBackgrounds.pages.internshipUnpaid}')` }} />
+          <div className="section-bg__overlay" />
+        </div>
         <div className="container">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <h2 className="section-title" style={{ marginBottom: 8 }}>Unpaid Internship</h2>

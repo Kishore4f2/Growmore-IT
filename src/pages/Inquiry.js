@@ -1,12 +1,17 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Home.css';
+import { curatedBackgrounds } from '../assets/curatedBackgrounds';
 
 const Inquiry = () => {
   const navigate = useNavigate();
   return (
     <div className="home-container dark">
-      <section className="grow-together-section" style={{ marginTop: 24 }}>
+      <section className="grow-together-section with-blur-bg" style={{ marginTop: 24 }}>
+        <div className="section-bg">
+          <div className="section-bg__media" style={{ backgroundImage: `url('${curatedBackgrounds.pages.inquiry}')` }} />
+          <div className="section-bg__overlay" />
+        </div>
         <div className="container">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <h2 className="section-title" style={{ marginBottom: 8 }}>Inquiry</h2>

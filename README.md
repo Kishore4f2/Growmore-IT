@@ -58,6 +58,28 @@ npm start
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
+## 🔁 UI/UX Overhaul (branch: `improve/ui-services-carousel`)
+
+Changes included:
+
+- feat(services): added `data/services.json` and `ServiceCard` component
+- feat(carousel): added lightweight `ServiceCarousel` (arrows, dots, lazy images)
+- style(layout): reduced section paddings/margins on mobile (8–12px gutters), 2/4 column services grid
+- feat(services-page): enhanced `/services/:slug` using `services.json` (hero carousel, features, description, CTA)
+- fix(ui): reduced hero image height and compacted “Let’s Grow” image area
+- feat(footer): footer with logo, LinkedIn/Facebook links, and legal links
+- fix(login): admin login is a centered modal on mobile, drawer on desktop
+
+### Test checklist
+1. Home spacing compact on mobile; services grid 2 cols (mobile), 4 cols (desktop).
+2. Each service card shows a carousel + “Visit Our Service →” CTA; keyboard focus + Enter works.
+3. Navigate to `/services/web-development`; verify carousel, features, and contact form.
+4. Product Demo section is removed.
+5. “Share Your Project Idea” box appears between Inquiry and Apply for Job; heights are compact.
+6. Footer shows logo, social links, and Privacy/Terms.
+7. Admin login behaves as modal (mobile) and drawer (desktop).
+8. Images have `alt` + `loading=\"lazy\"`; controls have `aria-label`.
+
 ## 📁 Project Structure
 
 ```

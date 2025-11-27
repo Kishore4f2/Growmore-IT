@@ -1,0 +1,24 @@
+.wm-wrap {
+  overflow: hidden;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  background: radial-gradient(800px 400px at 0% 0%, rgba(108,124,255,.15), transparent 60%);
+}
+.wm-track {
+  display: flex;
+  gap: 28px;
+  white-space: nowrap;
+  animation: wm-scroll 18s linear infinite;
+  padding: 12px 8px;
+}
+.wm-item {
+  color: var(--text-secondary);
+  letter-spacing: 2px;
+  font-size: 12px;
+}
+@keyframes wm-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+

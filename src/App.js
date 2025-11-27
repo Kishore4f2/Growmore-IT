@@ -9,6 +9,7 @@ import EmployeeLogin from './pages/EmployeeLogin';
 import InternLogin from './pages/InternLogin';
 import EmployeeRegister from './pages/EmployeeRegister';
 import InternApply from './pages/InternApply';
+import ServiceDetail from './pages/ServiceDetail';
 
 // Dashboards
 import AdminDashboard from './pages/AdminDashboard';
@@ -33,6 +34,7 @@ function App() {
         <Route path="/intern/login" element={<InternLogin />} />
         <Route path="/employee/register" element={<EmployeeRegister />} />
         <Route path="/intern/apply" element={<InternApply />} />
+        <Route path="/services/:slug" element={<ServiceDetail />} />
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/employee/dashboard" element={<EmployeeDashboard />} />
         <Route path="/intern/dashboard" element={<InternDashboard />} />

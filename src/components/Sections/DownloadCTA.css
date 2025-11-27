@@ -1,0 +1,17 @@
+.dl-wrap { margin: 24px 12px; }
+.dl-inner {
+  border-radius: 16px;
+  padding: clamp(18px, 5vw, 28px);
+  background: radial-gradient(800px 400px at 0% 0%, rgba(108,124,255,.20), transparent 60%), var(--bg-primary);
+  border: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 16px;
+}
+.dl-text h2 { margin: 0 0 6px 0; color: var(--text-primary); font-size: clamp(20px, 4vw, 28px); }
+.dl-text p { margin: 0; color: var(--text-secondary); }
+.dl-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+@media (max-width: 720px) { .dl-inner { grid-template-columns: 1fr; } .dl-actions { justify-content: flex-start; } }
+
+

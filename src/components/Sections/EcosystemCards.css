@@ -1,0 +1,30 @@
+.eco-wrap { margin: 24px 12px; }
+.eco-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.eco-card {
+  border-radius: 16px;
+  padding: 18px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  transition: transform .2s ease, box-shadow .25s ease;
+}
+.eco-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px var(--shadow); }
+.eco-top { display: flex; align-items: center; gap: 8px; color: var(--text-secondary); font-size: 12px; }
+.eco-idx { font-weight: 700; letter-spacing: .5px; }
+.eco-dot { opacity: .8; }
+.eco-brand { font-weight: 600; }
+.eco-copy { opacity: .8; }
+.eco-year { margin-left: auto; opacity: .7; }
+.eco-title { margin: 10px 0 8px 0; color: var(--text-primary); font-size: 18px; }
+.eco-desc { margin: 8px 0 10px 0; color: var(--text-secondary); font-size: 14px; line-height: 1.6; }
+.eco-line { height: 1px; background: var(--border-color); }
+.eco-line--top { margin: 6px 0 10px; }
+.eco-line--bottom { margin: 10px 0 8px; }
+.eco-more { color: var(--primary-color); font-weight: 600; font-size: 14px; }
+@media (max-width: 900px) { .eco-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .eco-grid { grid-template-columns: 1fr; } }
+
+

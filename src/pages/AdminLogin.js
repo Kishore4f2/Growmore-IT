@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
+import './Home.css';
+import { curatedBackgrounds } from '../assets/curatedBackgrounds';
 
 const AdminLogin = () => {
   const [formData, setFormData] = useState({
@@ -32,7 +34,11 @@ const AdminLogin = () => {
   };
 
   return (
-    <div className="login-container">
+    <div className="login-container with-blur-bg">
+      <div className="section-bg">
+        <div className="section-bg__media" style={{ backgroundImage: `url('${curatedBackgrounds.pages.loginAdmin}')` }} />
+        <div className="section-bg__overlay" />
+      </div>
       <nav className="navbar">
         <div className="nav-content">
           <div className="logo" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>

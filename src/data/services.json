@@ -1,0 +1,67 @@
+[
+  {
+    "id": 1,
+    "slug": "web-development",
+    "icon": "💻",
+    "title": "Web Development",
+    "excerpt": "Modern, responsive, growth‑focused websites.",
+    "shortDesc": "We create modern, responsive, and growth-focused websites that make your business stand out online.",
+    "description": "Our web development services focus on performance, accessibility, and engaging user experiences. From design to deployment, we deliver resilient and scalable solutions tailored to your brand and audience.",
+    "features": ["Custom websites", "SEO & performance", "CMS & forms", "Hosting & maintenance"],
+    "images": [
+      "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1529101091764-c3526daf38fe?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1520975922284-9e0a6c59a910?q=80&w=1200&auto=format&fit=crop"
+    ]
+  },
+  {
+    "id": 2,
+    "slug": "mobile-app-development",
+    "icon": "📱",
+    "title": "Mobile App Development",
+    "excerpt": "Engaging, high‑performance Android & iOS apps.",
+    "shortDesc": "Engaging, high-performance mobile apps designed to connect businesses with their customers.",
+    "description": "We build intuitive, scalable mobile apps that delight users and drive results. From MVPs to full‑featured products, we handle the entire lifecycle.",
+    "features": ["Android & iOS", "Push & analytics", "Scalable backends", "App Store/Play deployment"],
+    "images": [
+      "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1483721310020-03333e577078?q=80&w=1200&auto=format&fit=crop"
+    ]
+  },
+  {
+    "id": 3,
+    "slug": "it-consulting",
+    "icon": "🧠",
+    "title": "IT Consulting",
+    "excerpt": "Strategy, roadmaps, and architecture.",
+    "shortDesc": "Strategic guidance to make the right technology decisions for growth.",
+    "description": "We analyze your processes, identify opportunities, and craft pragmatic roadmaps for sustainable digital transformation.",
+    "features": ["Process automation", "Cloud strategy", "Security & compliance", "Cost optimization"],
+    "images": [
+      "https://images.unsplash.com/photo-1526378722484-bd91ca387e72?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1526372295303-67e8c18a3f91?q=80&w=1200&auto=format&fit=crop"
+    ]
+  },
+  {
+    "id": 4,
+    "slug": "digital-solutions",
+    "icon": "💡",
+    "title": "Digital Solutions",
+    "excerpt": "Tailored systems for operations & growth.",
+    "shortDesc": "Custom digital systems to automate tasks and accelerate growth.",
+    "description": "From ERP/CRM to custom dashboards, we build secure, cloud‑ready solutions that improve productivity and decision‑making.",
+    "features": ["ERP/CRM", "Dashboards", "Integrations", "Automation"],
+    "images": [
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1545235617-9465d2a55698?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop"
+    ]
+  }
+]
+

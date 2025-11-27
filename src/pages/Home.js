@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Home.css';
 
+import servicesData from '../data/services.json';
+import ServiceCard from '../components/ServiceCard';
+
+
 const Home = () => {
   const [activeService, setActiveService] = useState(null);
   const [showInternshipOptions, setShowInternshipOptions] = useState(false);
@@ -29,107 +33,7 @@ const Home = () => {
     navigate('/admin/login');
   };
 
-  const services = [
-    {
-      id: 1,
-      icon: '💻',
-      title: 'Web Development',
-      shortDesc: 'We create modern, responsive, and growth-focused websites that make your business stand out online.',
-      fullDesc: 'Our web development services are built around performance, creativity, and user engagement. We design websites that reflect your brand identity, attract your target audience, and convert visitors into customers. From corporate sites to dynamic business portals, we handle everything from planning to launch — ensuring a flawless user experience across all devices.',
-      includes: ['Custom business and portfolio websites', 'Admin panels and contact systems', 'Optimized structure for faster loading and SEO', 'Integration of forms, chat, and booking tools', 'Full domain, hosting, and maintenance support'],
-      cta: ['Get a Free Website Demo', 'Request a Quote']
-    },
-    {
-      id: 2,
-      icon: '📱',
-      title: 'Mobile App Development',
-      shortDesc: 'Engaging, high-performance mobile apps designed to connect businesses with their customers.',
-      fullDesc: 'We build intuitive and scalable mobile applications tailored to your business needs. From idea to deployment, our team ensures your app delivers a smooth experience that keeps users coming back. Whether you want a business app, an e-commerce app, or a customer service app — we create it with precision and creativity.',
-      includes: ['Android and iOS mobile applications', 'Personalized design and seamless navigation', 'In-app chat, notifications, and analytics', 'Easy management dashboard', 'Post-launch updates and maintenance'],
-      cta: ['See App Portfolio', 'Book a Free Consultation']
-    },
-    {
-      id: 3,
-      icon: '🧠',
-      title: 'IT Consulting',
-      shortDesc: 'Strategic guidance to help you make the right technology decisions for your business growth.',
-      fullDesc: 'Our IT consulting services help you bridge the gap between business goals and technology execution. We analyze your workflow, identify improvement areas, and create customized digital strategies that increase efficiency and profitability.',
-      includes: ['Business process automation planning', 'Digital transformation roadmap', 'IT infrastructure and scalability consulting', 'Cost-effective project implementation strategy', 'Security and performance audits'],
-      cta: ['Book Free IT Consultation', 'Talk to an Expert']
-    },
-    {
-      id: 4,
-      icon: '💡',
-      title: 'Digital Solutions',
-      shortDesc: 'Tailored digital systems to streamline your operations and accelerate growth.',
-      fullDesc: 'Our digital solutions help businesses automate manual tasks, manage operations, and improve decision-making. From ERP and CRM systems to automation tools, we provide complete digital ecosystems that simplify your work and increase productivity.',
-      includes: ['Custom management and reporting systems', 'Billing, HR, and CRM automation', 'Smart dashboards and data visualization', 'Secure, cloud-enabled access', 'Integration with existing workflows'],
-      cta: ['Explore Custom Solutions', 'Schedule a Demo']
-    },
-    {
-      id: 5,
-      icon: '🧩',
-      title: 'Software Development',
-      shortDesc: 'Custom software designed to meet your exact business needs.',
-      fullDesc: 'We build robust and flexible software solutions tailored to your business processes. Our approach focuses on usability, reliability, and long-term scalability — giving you tools that simplify operations and enhance decision-making.',
-      includes: ['Business management and billing systems', 'Data management and analytics tools', 'Automated reporting and dashboards', 'Multi-user role-based control', 'Ongoing updates and technical support'],
-      cta: ['Try Free Demo Software', 'Get Custom Quote']
-    },
-    {
-      id: 6,
-      icon: '🎨',
-      title: 'UI/UX Design',
-      shortDesc: 'Designs that balance beauty, usability, and performance.',
-      fullDesc: 'We craft user interfaces that not only look great but also deliver intuitive and enjoyable user experiences. Our design process is focused on understanding user behavior, ensuring every click feels natural and every screen feels inviting.',
-      includes: ['Brand-focused layouts', 'Prototypes and wireframes', 'User journey optimization', 'Conversion-focused design approach', 'Visual identity consistency'],
-      cta: ['View Design Samples', 'Start Your Design Project']
-    },
-    {
-      id: 7,
-      icon: '☁',
-      title: 'Cloud & Hosting Solutions',
-      shortDesc: 'Reliable, secure, and scalable digital infrastructure for your business.',
-      fullDesc: 'We provide complete cloud and hosting solutions to keep your business running smoothly around the clock. Our services ensure high performance, data protection, and zero downtime — so your business stays connected anywhere, anytime.',
-      includes: ['Secure business hosting setup', 'Backup & disaster recovery planning', 'Cloud migration and optimization', 'Email and domain setup', 'Performance monitoring and management'],
-      cta: ['Upgrade Your Hosting', 'Get Cloud Consultation']
-    },
-    {
-      id: 8,
-      icon: '🛍',
-      title: 'E-Commerce Development',
-      shortDesc: 'Build and grow your online store with seamless shopping experiences.',
-      fullDesc: 'We design and develop e-commerce platforms that combine style, speed, and security. From product listing to payment gateways, our solutions help you sell efficiently while delivering a smooth shopping experience to customers.',
-      includes: ['Product and order management systems', 'Secure checkout and payment integration', 'Admin dashboard with sales analytics', 'SEO-friendly and mobile-optimized store design', 'Custom coupon and loyalty systems'],
-      cta: ['Launch Your Store', 'Get Free Store Audit']
-    },
-    {
-      id: 9,
-      icon: '🚀',
-      title: 'Digital Marketing & Branding',
-      shortDesc: 'Expand your digital reach and attract quality leads with proven strategies.',
-      fullDesc: 'We help you grow your brand online through smart digital marketing campaigns that generate measurable results. From SEO and social media to targeted ads, our strategies ensure your business gets noticed by the right audience.',
-      includes: ['SEO optimization and content marketing', 'Social media management and campaigns', 'Google Ads, Meta Ads, and influencer marketing', 'Brand awareness and positioning strategy', 'Monthly growth reports and analytics'],
-      cta: ['Get Free Marketing Audit', 'Boost Your Online Presence']
-    },
-    {
-      id: 10,
-      icon: '🛠',
-      title: 'Maintenance & Support',
-      shortDesc: 'We keep your digital assets secure, updated, and running perfectly.',
-      fullDesc: 'Our maintenance and support plans ensure your websites, apps, and software remain fast, secure, and updated. We handle regular updates, backups, and security monitoring so you can focus on your business, worry-free.',
-      includes: ['Security updates and monitoring', 'Bug fixing and issue resolution', 'Regular backups and performance optimization', 'Version upgrades and content updates', 'Priority technical support'],
-      cta: ['Subscribe for Maintenance Plan', 'Get 24/7 Support']
-    },
-    {
-      id: 11,
-      icon: '🤖',
-      title: 'AI & Automation Solutions',
-      shortDesc: 'Future-ready AI systems that make your business smarter and faster.',
-      fullDesc: 'We develop AI and automation systems that help businesses save time, reduce manual work, and make smarter decisions. Our goal is to empower your business with intelligent tools that optimize operations and unlock new opportunities.',
-      includes: ['AI chatbots and customer assistants', 'Smart workflow and data automation', 'Predictive analytics and insights', 'Process optimization tools', 'AI-based business forecasting'],
-      cta: ['Request AI Demo', 'Automate Your Business Today']
-    }
-  ];
+  const services = servicesData;
 
   const handleInternshipApply = () => {
     setShowInternshipOptions(true);
@@ -204,7 +108,6 @@ const Home = () => {
             <button onClick={() => { scrollToSection('home'); setMobileMenuOpen(false); }} className="nav-link">Home</button>
             <button onClick={() => { scrollToSection('about'); setMobileMenuOpen(false); }} className="nav-link">About</button>
             <button onClick={() => { scrollToSection('services'); setMobileMenuOpen(false); }} className="nav-link">Services</button>
-            <button onClick={() => { scrollToSection('products'); setMobileMenuOpen(false); }} className="nav-link">Products</button>
             <button onClick={() => { scrollToSection('internship'); setMobileMenuOpen(false); }} className="nav-link">Internship</button>
             <button onClick={() => { scrollToSection('contact'); setMobileMenuOpen(false); }} className="nav-link">Contact</button>
             <button className="nav-link" onClick={() => { setShowLoginModal(true); setMobileMenuOpen(false); }}>Login</button>
@@ -227,7 +130,7 @@ const Home = () => {
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'center top',
-            filter: 'none', /* show clear, unblurred image for impact */
+            filter: 'none',
             zIndex: -1,
           }}
         />
@@ -295,79 +198,18 @@ const Home = () => {
           </p>
           <div className="services-grid">
             {services.map((service) => (
-              <div
+              <ServiceCard
                 key={service.id}
-                className={`service-card ${activeService === service.id ? 'expanded' : ''}`}
-                onClick={() => handleServiceClick(service.id)}
-              >
-                <div className="service-card-front">
-                  <div className="service-banner" style={{ backgroundImage: `url('${serviceImages[service.id]}')` }} />
-                  <div className="service-icon">{service.icon}</div>
-                  <h3 className="service-title">{service.title}</h3>
-                  <p className="service-short-desc">{service.shortDesc}</p>
-                  <div className="service-cta">Click to learn more →</div>
-                </div>
-                {activeService === service.id && (
-                  <div className="service-card-back">
-                    <h3 className="service-title">{service.title}</h3>
-                    <p className="service-full-desc">{service.fullDesc}</p>
-                    <div className="service-includes">
-                      <h4>Includes:</h4>
-                      <ul>
-                        {service.includes.map((item, idx) => (
-                          <li key={idx}>{item}</li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div className="service-cta-buttons">
-                      <button className="btn-cta">{service.cta[0]}</button>
-                      <button className="btn-cta">{service.cta[1]}</button>
-                    </div>
-                  </div>
-                )}
-              </div>
+                service={service}
+                onClickCard={() => handleServiceClick(service.id)}
+                onVisit={() => navigate(`/services/${service.slug}`, { state: { serviceId: service.id } })}
+              />
             ))}
           </div>
         </div>
       </section>
 
-      {/* Products Demo Section */}
-      <section id="products" className="products-section">
-        <div className="container">
-          <h2 className="section-title">Product Demos</h2>
-          <p className="section-subtitle">Interactive, future-ready solutions with rich animations and elegant UI.</p>
-          <div className="product-grid">
-            <div className="product-card">
-              <div className="product-visual blood" style={{ backgroundImage: `url('${productImages.blood}')`, backgroundSize: 'cover', backgroundPosition: 'center' }}><span className="emoji">🩸</span></div>
-              <h3 className="product-title">Bloodbank Management Software</h3>
-              <p className="product-desc">Inventory, billing, and an advanced dashboard built for healthcare.</p>
-              <div className="product-meta">Inventory Management • Billing • Advance Dashboard</div>
-            </div>
-            <div className="product-card">
-              <div className="product-visual feedback" style={{ backgroundImage: `url('${productImages.feedback}')`, backgroundSize: 'cover', backgroundPosition: 'center' }}><span className="emoji">🗳️</span></div>
-              <h3 className="product-title">Advance Feedback Portal</h3>
-              <p className="product-desc">Collect, analyze, and act on feedback with real-time insights.</p>
-              <div className="product-meta">Analytics • Sentiment • Custom Workflows</div>
-            </div>
-            <div className="product-card">
-              <div className="product-visual inventory" style={{ backgroundImage: `url('${productImages.inventory}')`, backgroundSize: 'cover', backgroundPosition: 'center' }}><span className="emoji">📦</span></div>
-              <h3 className="product-title">Inventory Management (Web/App)</h3>
-              <p className="product-desc">Multi-platform stock, orders, suppliers, and smart alerts.</p>
-              <div className="product-meta">Web • Android • iOS</div>
-            </div>
-            <div className="product-card">
-              <div className="product-visual tender" style={{ backgroundImage: `url('${productImages.tender}')`, backgroundSize: 'cover', backgroundPosition: 'center' }}><span className="emoji">🏛️</span></div>
-              <h3 className="product-title">Government Tender</h3>
-              <p className="product-desc">Discover, manage, and apply with compliant documentation.</p>
-              <div className="product-meta">Discovery • Docs • Tracking</div>
-            </div>
-          </div>
-
-          <div className="product-cta">
-            <button className="btn btn-primary" onClick={() => setShowIdeaModal(true)}>✨ Add Your Project Idea</button>
-          </div>
-        </div>
-      </section>
+      {/* Products Demo Section - removed as requested */}
 
       {/* Internship Section */}
       <section id="internship" className="internship-section">
@@ -412,13 +254,39 @@ const Home = () => {
                 <h3>1️⃣ Inquiry</h3>
                 <p>Have questions? Get in touch with us</p>
               </div>
+              <div className="grow-box" onClick={() => setShowIdeaModal(true)}>
+                <h3>🧩 Share Your Project Idea</h3>
+                <p>Tell us what you want to build</p>
+              </div>
               <div className="grow-box" onClick={() => navigate('/apply-job')}>
                 <h3>2️⃣ Apply for Job</h3>
                 <p>Join our team and grow with us</p>
               </div>
             </div>
             <div className="grow-together-right">
-              <div className="grow-image-placeholder" style={{ backgroundImage: `url('${growImage}')`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
+              {/* simple scroll-snap carousel with 5 demo images */}
+              <div className="carousel">
+                <div className="carousel-track">
+                  {[
+                    productImages.blood,
+                    productImages.feedback,
+                    'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200&auto=format&fit=crop',
+                    'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1200&auto=format&fit=crop',
+                    'https://images.unsplash.com/photo-1557821552-17105176677c?q=80&w=1200&auto=format&fit=crop'
+                  ].map((src, idx) => (
+                    <div className="carousel-slide" key={idx}>
+                      <img src={src} alt={`demo-${idx+1}`} />
+                    </div>
+                  ))}
+                </div>
+                <div className="carousel-dots">
+                  <span className="carousel-dot"></span>
+                  <span className="carousel-dot"></span>
+                  <span className="carousel-dot"></span>
+                  <span className="carousel-dot"></span>
+                  <span className="carousel-dot"></span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -498,11 +366,22 @@ const Home = () => {
 
       {/* Footer */}
       <footer className="footer">
-        <div className="container">
-          <button onClick={() => setShowLoginModal(true)} className="footer-login-link">
-            Intern / Employee Login
-          </button>
-          <p>&copy; 2025 Growmore IT Services. All rights reserved.</p>
+        <div className="container" style={{display:'grid', gap:12}}>
+          <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', flexWrap:'wrap', gap:12}}>
+            <a href="/" aria-label="Home"><img src="/Growmore1.jpg" alt="Growmore IT" style={{height:32}}/></a>
+            <div style={{display:'flex', gap:12}}>
+              <a className="social-link" href="https://www.linkedin.com" aria-label="LinkedIn" target="_blank" rel="noreferrer">in</a>
+              <a className="social-link" href="https://facebook.com" aria-label="Facebook" target="_blank" rel="noreferrer">f</a>
+            </div>
+          </div>
+          <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:8}}>
+            <button onClick={() => setShowLoginModal(true)} className="footer-login-link" aria-label="Open login">Intern / Employee Login</button>
+            <div style={{display:'flex', gap:12}}>
+              <a href="/" style={{color:'var(--text-secondary)'}}>Privacy</a>
+              <a href="/" style={{color:'var(--text-secondary)'}}>Terms</a>
+            </div>
+          </div>
+          <p style={{color:'var(--text-secondary)', margin:0}}>&copy; 2025 Growmore IT Services. All rights reserved.</p>
         </div>
       </footer>
 
