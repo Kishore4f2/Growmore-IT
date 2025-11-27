@@ -796,6 +796,24 @@ section {
   transform: translate(-50%, -50%);
 }
 
+/* Faint blur/gradient decor behind sections/cards */
+.blur-decor {
+  position: absolute;
+  inset: -20%;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(600px 400px at 15% 20%, rgba(102,126,234,.12), transparent 60%),
+    radial-gradient(500px 300px at 85% 80%, rgba(118,75,162,.10), transparent 60%);
+  filter: blur(36px) saturate(120%);
+  opacity: .5;
+}
+.with-blur {
+  position: relative;
+  border-radius: 24px;
+}
+.with-blur > .container { position: relative; z-index: 1; }
+
 @keyframes shimmer {
   0% {
     background-position: -200% 0;

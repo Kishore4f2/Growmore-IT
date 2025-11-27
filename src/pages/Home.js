@@ -151,7 +151,8 @@ const Home = () => {
       </section>
 
       {/* About Section */}
-      <section id="about" className="about-section">
+      <section id="about" className="about-section with-blur">
+        <span className="blur-decor" aria-hidden="true"></span>
         <div className="container">
           <h2 className="section-title">About Us</h2>
           <div className="about-content">
@@ -190,7 +191,8 @@ const Home = () => {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="services-section">
+      <section id="services" className="services-section with-blur">
+        <span className="blur-decor" aria-hidden="true"></span>
         <div className="container">
           <h2 className="section-title">Our Services</h2>
           <p className="section-subtitle">
@@ -212,7 +214,8 @@ const Home = () => {
       {/* Products Demo Section - removed as requested */}
 
       {/* Internship Section */}
-      <section id="internship" className="internship-section">
+      <section id="internship" className="internship-section with-blur">
+        <span className="blur-decor" aria-hidden="true"></span>
         <div className="container">
           <h2 className="section-title">Internship Program</h2>
           <p className="section-subtitle">
@@ -245,7 +248,8 @@ const Home = () => {
       </section>
 
       {/* Let's Grow Together Section */}
-      <section id="grow-together" className="grow-together-section">
+      <section id="grow-together" className="grow-together-section with-blur">
+        <span className="blur-decor" aria-hidden="true"></span>
         <div className="container">
           <h2 className="section-title">LET'S GROW TOGETHER</h2>
           <div className="grow-together-content">
@@ -254,9 +258,10 @@ const Home = () => {
                 <h3>1️⃣ Inquiry</h3>
                 <p>Have questions? Get in touch with us</p>
               </div>
-              <div className="grow-box" onClick={() => setShowIdeaModal(true)}>
+              <div className="grow-box">
                 <h3>🧩 Share Your Project Idea</h3>
-                <p>Tell us what you want to build</p>
+                <p>Tell us about your project. We'll contact you within 24 hours.</p>
+                <button className="btn btn-primary" aria-label="Share your idea" onClick={()=> setShowIdeaModal(true)} style={{marginTop:8, alignSelf:'flex-start'}}>Share Idea</button>
               </div>
               <div className="grow-box" onClick={() => navigate('/apply-job')}>
                 <h3>2️⃣ Apply for Job</h3>
@@ -293,7 +298,8 @@ const Home = () => {
       </section>
 
       {/* Letter Download Section */}
-      <section id="letter-download" className="letter-download-section">
+      <section id="letter-download" className="letter-download-section with-blur">
+        <span className="blur-decor" aria-hidden="true"></span>
         <div className="container">
           <h2 className="section-title">Offer Letter / Completion Letter Download</h2>
           <div className="letter-download-content">
@@ -327,7 +333,8 @@ const Home = () => {
       </section>
 
       {/* Our Owners Section */}
-      <section id="owners" className="owners-section">
+      <section id="owners" className="owners-section with-blur">
+        <span className="blur-decor" aria-hidden="true"></span>
         <div className="container">
           <h2 className="section-title">Our Owners</h2>
           <div className="owners-grid">
@@ -345,7 +352,8 @@ const Home = () => {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="contact-section">
+      <section id="contact" className="contact-section with-blur">
+        <span className="blur-decor" aria-hidden="true"></span>
         <div className="container">
           <h2 className="section-title">Contact Us</h2>
           <div className="contact-content">
@@ -370,7 +378,8 @@ const Home = () => {
           <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', flexWrap:'wrap', gap:12}}>
             <a href="/" aria-label="Home"><img src="/Growmore1.jpg" alt="Growmore IT" style={{height:32}}/></a>
             <div style={{display:'flex', gap:12}}>
-              <a className="social-link" href="https://www.linkedin.com" aria-label="LinkedIn" target="_blank" rel="noreferrer">in</a>
+            <a className="social-link" href="https://instagram.com" aria-label="Instagram" target="_blank" rel="noreferrer">⌾</a>
+            <a className="social-link" href="https://www.linkedin.com" aria-label="LinkedIn" target="_blank" rel="noreferrer">in</a>
               <a className="social-link" href="https://facebook.com" aria-label="Facebook" target="_blank" rel="noreferrer">f</a>
             </div>
           </div>
