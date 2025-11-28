@@ -4,6 +4,13 @@ import './Home.css';
 
 import servicesData from '../data/services.json';
 import ServiceCard from '../components/ServiceCard';
+import HeroCarousel from '../components/Hero/HeroCarousel';
+import MegaMenu from '../components/Header/MegaMenu';
+import ParticleField from '../components/Background/ParticleField';
+import Blobs from '../components/Background/Blobs';
+import Reveal from '../components/Section/Reveal';
+import SiteFooter from '../components/Footer/SiteFooter';
+import ServiceCarousel from '../components/ServiceCarousel';
 
 
 const Home = () => {
@@ -20,6 +27,9 @@ const Home = () => {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [loginType, setLoginType] = useState('intern');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [theme, setTheme] = useState('dark');
+  const [showSearch, setShowSearch] = useState(false);
+  const [infoTab, setInfoTab] = useState('owners');
   const navigate = useNavigate();
 
   const scrollToSection = (id) => {
@@ -33,7 +43,41 @@ const Home = () => {
     navigate('/admin/login');
   };
 
-  const services = servicesData;
+  const fallbackServices = [
+    {
+      id: 101,
+      slug: 'web-development',
+      icon: '💻',
+      title: 'Web Development',
+      shortDesc: 'Modern, responsive, growth‑focused websites.',
+      images: ['https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=1200&auto=format&fit=crop']
+    },
+    {
+      id: 102,
+      slug: 'mobile-app-development',
+      icon: '📱',
+      title: 'Mobile App Development',
+      shortDesc: 'High‑performance Android & iOS applications.',
+      images: ['https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=1200&auto=format&fit=crop']
+    },
+    {
+      id: 103,
+      slug: 'it-consulting',
+      icon: '🧠',
+      title: 'IT Consulting',
+      shortDesc: 'Strategy, roadmaps, and architecture.',
+      images: ['https://images.unsplash.com/photo-1526378722484-bd91ca387e72?q=80&w=1200&auto=format&fit=crop']
+    },
+    {
+      id: 104,
+      slug: 'digital-solutions',
+      icon: '💡',
+      title: 'Digital Solutions',
+      shortDesc: 'Tailored systems for operations & growth.',
+      images: ['https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop']
+    }
+  ];
+  const services = Array.isArray(servicesData) && servicesData.length ? servicesData : fallbackServices;
 
   const handleInternshipApply = () => {
     setShowInternshipOptions(true);
@@ -89,115 +133,135 @@ const Home = () => {
 
   const aboutImage = 'https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=1200&auto=format&fit=crop';
   const growImage = 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200&auto=format&fit=crop';
+  const growGallery = [
+    'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1600&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1600&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1600&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1600&auto=format&fit=crop'
+  ];
   const owners = [
     { name: 'Owner One', title: 'Owner', img: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop' },
     { name: 'Owner Two', title: 'Owner', img: 'https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=800&auto=format&fit=crop' }
   ];
 
-  return (
-    <div className="home-container dark">
-      {/* Navbar */}
-      <nav className="navbar">
-        <div className="nav-content">
-          <div className="logo" onClick={handleLogoClick} style={{ cursor: 'pointer' }}>
-            <div className="logo-icon">
-              <img src="/Growmore1.jpg" alt="Growmore IT" className="logo-img" />
-            </div>
-          </div>
-          <div className={`nav-links ${mobileMenuOpen ? 'mobile-open' : ''}`}>
-            <button onClick={() => { scrollToSection('home'); setMobileMenuOpen(false); }} className="nav-link">Home</button>
-            <button onClick={() => { scrollToSection('about'); setMobileMenuOpen(false); }} className="nav-link">About</button>
-            <button onClick={() => { scrollToSection('services'); setMobileMenuOpen(false); }} className="nav-link">Services</button>
-            <button onClick={() => { scrollToSection('internship'); setMobileMenuOpen(false); }} className="nav-link">Internship</button>
-            <button onClick={() => { scrollToSection('contact'); setMobileMenuOpen(false); }} className="nav-link">Contact</button>
-            <button className="nav-link" onClick={() => { setShowLoginModal(true); setMobileMenuOpen(false); }}>Login</button>
-            <button onClick={() => { handleGetStarted(); setMobileMenuOpen(false); }} className="nav-link btn-get-started">Get Started</button>
-          </div>
-          <div className="nav-actions">
-            <button className="mobile-menu-toggle" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-              {mobileMenuOpen ? '✕' : '☰'}
-            </button>
-          </div>
-        </div>
-      </nav>
+  // Contact form state and handlers
+  const [contactForm, setContactForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    subject: '',
+    message: '',
+    category: 'General',
+    consent: true
+  });
+  const [contactErrors, setContactErrors] = useState({});
 
-      {/* Hero Section */}
-      <section id="home" className="hero-section">
-        <div
-          className="hero-background"
-          style={{
-            backgroundImage: "url('/Growmore.jpg')",
-            backgroundSize: 'cover',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'center top',
-            filter: 'none',
-            zIndex: -1,
-          }}
-        />
-        <div className="hero-content">
-          <h1 className="hero-title">Empowering Growth Through Technology</h1>
-          <p className="hero-subtitle">
-            Comprehensive IT solutions designed to elevate your business and drive sustainable growth.
-          </p>
-          <div className="hero-buttons">
-            <button onClick={() => scrollToSection('services')} className="btn btn-primary">
-              Explore Services
-            </button>
-            <button onClick={handleGetStarted} className="btn btn-secondary">
-              Get Started
-            </button>
-          </div>
-        </div>
+  const isValidEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  const isValidPhone = (v) => v.trim() === '' || /^[0-9+\-\s()]{7,}$/.test(v);
+
+  const validateContact = (draft = contactForm) => {
+    const errs = {};
+    if (!draft.name.trim()) errs.name = 'Please enter your name';
+    if (!isValidEmail(draft.email)) errs.email = 'Enter a valid email';
+    if (!isValidPhone(draft.phone)) errs.phone = 'Enter a valid phone number';
+    if (!draft.subject.trim()) errs.subject = 'Please add a subject';
+    if (!draft.message.trim() || draft.message.trim().length < 10) errs.message = 'Message should be at least 10 characters';
+    if (!draft.consent) errs.consent = 'Please accept to be contacted';
+    return errs;
+  };
+
+  const onContactChange = (field, value) => {
+    const next = { ...contactForm, [field]: value };
+    setContactForm(next);
+    setContactErrors(validateContact(next));
+  };
+
+  const onContactSubmit = (e) => {
+    e.preventDefault();
+    const errs = validateContact();
+    setContactErrors(errs);
+    if (Object.keys(errs).length > 0) return;
+
+    // Working mailto fallback (no backend needed)
+    const to = 'info@growmoreit.com';
+    const subject = encodeURIComponent(`[${contactForm.category}] ${contactForm.subject}`);
+    const body = encodeURIComponent(
+      `Name: ${contactForm.name}\nEmail: ${contactForm.email}\nPhone: ${contactForm.phone}\nCategory: ${contactForm.category}\n\n${contactForm.message}`
+    );
+    window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+    alert('Thanks! Your mail app will open with your message. We will get back to you.');
+    setContactForm({ name: '', email: '', phone: '', subject: '', message: '', category: 'General', consent: true });
+  };
+
+  return (
+    <div className={`home-container ${theme}`}>
+      {/* Premium Header */}
+      <MegaMenu
+        onLogoClick={() => navigate('/admin/login')}
+        onToggleSearch={() => setShowSearch(true)}
+        onToggleTheme={() => setTheme(prev => prev === 'dark' ? 'light' : 'dark')}
+        onLogin={() => setShowLoginModal(true)}
+        theme={theme}
+        onNavigate={(to) => navigate(to)}
+      />
+
+      {/* Infosys-style Hero Carousel with animated background */}
+      <section id="home" className="hero-section with-blur-bg" style={{ minHeight: '100vh', margin: 0, padding: 0, position: 'relative', zIndex: 0 }}>
+        <HeroCarousel onPrimary={() => scrollToSection('services')} />
       </section>
 
-      {/* About Section */}
-      <section id="about" className="about-section with-blur">
-        <span className="blur-decor" aria-hidden="true"></span>
+      {/* About Section - compact, premium blend background with reveal */}
+      <section id="about" className="about-section with-blur-bg">
         <div className="container">
-          <h2 className="section-title">About Us</h2>
+          <Reveal><h2 className="section-title">About Us</h2></Reveal>
           <div className="about-content">
-            <div className="about-text">
-              <h3>Welcome to Growmore IT Services</h3>
-              <p>
-                We are a leading IT solutions provider dedicated to helping businesses grow through innovative technology.
-                Our team of experts combines creativity, technical expertise, and strategic thinking to deliver solutions
-                that drive real results.
-              </p>
-              <p>
-                With years of experience in the industry, we understand the challenges businesses face in today's digital
-                landscape. We work closely with our clients to understand their unique needs and deliver customized solutions
-                that exceed expectations.
-              </p>
-              <div className="about-stats">
-                <div className="stat-card">
-                  <div className="stat-number">500+</div>
-                  <div className="stat-label">Projects Completed</div>
-                </div>
-                <div className="stat-card">
-                  <div className="stat-number">200+</div>
-                  <div className="stat-label">Happy Clients</div>
-                </div>
-                <div className="stat-card">
-                  <div className="stat-number">50+</div>
-                  <div className="stat-label">Team Members</div>
+            <Reveal>
+              <div className="about-text">
+                <h3>Welcome to Growmore IT Services</h3>
+                <p>
+                  We are a leading IT solutions provider dedicated to helping businesses grow through innovative technology.
+                  Our team of experts combines creativity, technical expertise, and strategic thinking to deliver solutions
+                  that drive real results.
+                </p>
+                <p>
+                  With years of experience in the industry, we understand the challenges businesses face in today's digital
+                  landscape. We work closely with our clients to deliver customized solutions that exceed expectations.
+                </p>
+                <div className="about-stats">
+                  <div className="stat-card">
+                    <div className="stat-number">500+</div>
+                    <div className="stat-label">Projects Completed</div>
+                  </div>
+                  <div className="stat-card">
+                    <div className="stat-number">200+</div>
+                    <div className="stat-label">Happy Clients</div>
+                  </div>
+                  <div className="stat-card">
+                    <div className="stat-number">50+</div>
+                    <div className="stat-label">Team Members</div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="about-image">
-              <div className="about-image-placeholder" style={{ backgroundImage: `url('${aboutImage}')`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
-            </div>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <div className="about-image">
+                <div className="about-image-placeholder" style={{ backgroundImage: `url('${aboutImage}')`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* Services Section */}
-      <section id="services" className="services-section with-blur">
-        <span className="blur-decor" aria-hidden="true"></span>
+      {/* Services Section - premium glass cards with glow and hover animation */}
+      <section id="services" className="services-section with-blur-bg" style={{ position: 'relative', zIndex: 3 }}>
         <div className="container">
-          <h2 className="section-title">Our Services</h2>
-          <p className="section-subtitle">
-            Comprehensive IT solutions designed to elevate your business and drive sustainable growth.
-          </p>
+          <Reveal><h2 className="section-title">Our Services</h2></Reveal>
+          <Reveal delay={0.05}>
+            <p className="section-subtitle">
+              Comprehensive IT solutions designed to elevate your business and drive sustainable growth.
+            </p>
+          </Reveal>
           <div className="services-grid">
             {services.map((service) => (
               <ServiceCard
@@ -214,8 +278,7 @@ const Home = () => {
       {/* Products Demo Section - removed as requested */}
 
       {/* Internship Section */}
-      <section id="internship" className="internship-section with-blur">
-        <span className="blur-decor" aria-hidden="true"></span>
+      <section id="internship" className="internship-section">
         <div className="container">
           <h2 className="section-title">Internship Program</h2>
           <p className="section-subtitle">
@@ -247,152 +310,223 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Let's Grow Together Section */}
-      <section id="grow-together" className="grow-together-section with-blur">
-        <span className="blur-decor" aria-hidden="true"></span>
+      {/* Let's Grow Together Section - glass cards with subtle background animation */}
+      <section id="grow-together" className="grow-together-section with-blur-bg">
+        <Blobs />
         <div className="container">
-          <h2 className="section-title">LET'S GROW TOGETHER</h2>
+          <Reveal><h2 className="section-title">LET'S GROW TOGETHER</h2></Reveal>
           <div className="grow-together-content">
             <div className="grow-together-left">
-              <div className="grow-box" onClick={() => navigate('/inquiry')}>
+              <Reveal><div className="grow-box" onClick={() => navigate('/inquiry')}>
                 <h3>1️⃣ Inquiry</h3>
                 <p>Have questions? Get in touch with us</p>
-              </div>
-              <div className="grow-box">
+              </div></Reveal>
+              <Reveal delay={0.05}><div className="grow-box" onClick={() => setShowIdeaModal(true)}>
                 <h3>🧩 Share Your Project Idea</h3>
-                <p>Tell us about your project. We'll contact you within 24 hours.</p>
-                <button className="btn btn-primary" aria-label="Share your idea" onClick={()=> setShowIdeaModal(true)} style={{marginTop:8, alignSelf:'flex-start'}}>Share Idea</button>
-              </div>
-              <div className="grow-box" onClick={() => navigate('/apply-job')}>
+                <p>Tell us what you want to build</p>
+              </div></Reveal>
+              <Reveal delay={0.1}><div className="grow-box" onClick={() => navigate('/apply-job')}>
                 <h3>2️⃣ Apply for Job</h3>
                 <p>Join our team and grow with us</p>
-              </div>
+              </div></Reveal>
             </div>
             <div className="grow-together-right">
-              {/* simple scroll-snap carousel with 5 demo images */}
-              <div className="carousel">
-                <div className="carousel-track">
-                  {[
-                    productImages.blood,
-                    productImages.feedback,
-                    'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200&auto=format&fit=crop',
-                    'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1200&auto=format&fit=crop',
-                    'https://images.unsplash.com/photo-1557821552-17105176677c?q=80&w=1200&auto=format&fit=crop'
-                  ].map((src, idx) => (
-                    <div className="carousel-slide" key={idx}>
-                      <img src={src} alt={`demo-${idx+1}`} />
-                    </div>
-                  ))}
-                </div>
-                <div className="carousel-dots">
-                  <span className="carousel-dot"></span>
-                  <span className="carousel-dot"></span>
-                  <span className="carousel-dot"></span>
-                  <span className="carousel-dot"></span>
-                  <span className="carousel-dot"></span>
-                </div>
+              <div style={{ maxWidth: 420, marginLeft: 'auto', width: '100%' }}>
+                <ServiceCarousel images={growGallery} height={200} ariaLabel="Company culture and workspace" />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Letter Download Section */}
-      <section id="letter-download" className="letter-download-section with-blur">
-        <span className="blur-decor" aria-hidden="true"></span>
+      {/* Team & Letters - Combined Tabs */}
+      <section id="team-letters" className="owners-section with-blur-bg">
         <div className="container">
-          <h2 className="section-title">Offer Letter / Completion Letter Download</h2>
-          <div className="letter-download-content">
-            <form onSubmit={handleLetterAuth} className="letter-auth-form">
-              <h3>Authentication Required</h3>
-              <div className="form-group">
-                <label>Date of Birth:</label>
-                <input
-                  type="date"
-                  className="form-control"
-                  value={letterAuth.dob}
-                  onChange={(e) => setLetterAuth({ ...letterAuth, dob: e.target.value })}
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label>Registered Email ID:</label>
-                <input
-                  type="email"
-                  className="form-control"
-                  value={letterAuth.email}
-                  onChange={(e) => setLetterAuth({ ...letterAuth, email: e.target.value })}
-                  placeholder="Enter your registered email"
-                  required
-                />
-              </div>
-              <button type="submit" className="btn btn-primary">Verify & Download</button>
-            </form>
+          <h2 className="section-title">Team & Letters</h2>
+          <div style={{ display:'flex', justifyContent:'center', gap:12, marginBottom:16 }}>
+            <button
+              className="btn btn-secondary"
+              onClick={() => setInfoTab('owners')}
+              aria-controls="owners-panel"
+            >
+              Our Owners
+            </button>
+            <button
+              className="btn btn-secondary"
+              onClick={() => setInfoTab('letters')}
+              aria-controls="letters-panel"
+            >
+              Offer/Completion Letter
+            </button>
           </div>
-        </div>
-      </section>
-
-      {/* Our Owners Section */}
-      <section id="owners" className="owners-section with-blur">
-        <span className="blur-decor" aria-hidden="true"></span>
-        <div className="container">
-          <h2 className="section-title">Our Owners</h2>
-          <div className="owners-grid">
-            {owners.map((o, idx) => (
-              <div key={idx} className="owner-card">
-                <div className="owner-image">
-                  <img src={o.img} alt={o.name} />
+          {/* Owners Panel */}
+          <div id="owners-panel" style={{ display: infoTab === 'letters' ? 'none' : 'block' }}>
+            <div id="owners" />
+            <div className="owners-grid">
+              {owners.map((o, idx) => (
+                <div key={idx} className="owner-card">
+                  <div className="owner-image">
+                    <img src={o.img} alt={o.name} loading="lazy" />
+                  </div>
+                  <h3 className="owner-name">{o.name}</h3>
+                  <p className="owner-title">{o.title}</p>
                 </div>
-                <h3 className="owner-name">{o.name}</h3>
-                <p className="owner-title">{o.title}</p>
-              </div>
-            ))}
+              ))}
+            </div>
+          </div>
+          {/* Letters Panel */}
+          <div id="letters-panel" style={{ display: infoTab === 'letters' ? 'block' : 'none' }}>
+            <div id="letter-download" />
+            <div className="letter-download-content" style={{ maxWidth: 600, margin: '24px auto 0' }}>
+              <form onSubmit={handleLetterAuth} className="letter-auth-form">
+                <h3>Authentication Required</h3>
+                <div className="form-group">
+                  <label>Date of Birth:</label>
+                  <input
+                    type="date"
+                    className="form-control"
+                    value={letterAuth.dob}
+                    onChange={(e) => setLetterAuth({ ...letterAuth, dob: e.target.value })}
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Registered Email ID:</label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    value={letterAuth.email}
+                    onChange={(e) => setLetterAuth({ ...letterAuth, email: e.target.value })}
+                    placeholder="Enter your registered email"
+                    required
+                  />
+                </div>
+                <button type="submit" className="btn btn-primary">Verify & Download</button>
+              </form>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="contact-section with-blur">
-        <span className="blur-decor" aria-hidden="true"></span>
+      <section id="contact" className="contact-section">
         <div className="container">
           <h2 className="section-title">Contact Us</h2>
           <div className="contact-content">
-            <div className="contact-info">
-              <div className="contact-item">
-                <strong>Email:</strong> info@growmoreit.com
-              </div>
-              <div className="contact-item">
-                <strong>Phone:</strong> +91 1234567890
-              </div>
-              <div className="contact-item">
-                <strong>Address:</strong> Your Company Address Here
-              </div>
+            <div className="inquiry-form-container">
+              <h3>Send us a message</h3>
+              <form className="inquiry-form" onSubmit={onContactSubmit}>
+                <div className="form-grid">
+                  <div className="form-group">
+                    <label>Name</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      value={contactForm.name}
+                      onChange={(e)=> onContactChange('name', e.target.value)}
+                      placeholder="Your full name"
+                      required
+                    />
+                    {contactErrors.name && <small style={{ color: '#ef4444' }}>{contactErrors.name}</small>}
+                  </div>
+                  <div className="form-group">
+                    <label>Email</label>
+                    <input
+                      type="email"
+                      className="form-control"
+                      value={contactForm.email}
+                      onChange={(e)=> onContactChange('email', e.target.value)}
+                      placeholder="you@company.com"
+                      required
+                    />
+                    {contactErrors.email && <small style={{ color: '#ef4444' }}>{contactErrors.email}</small>}
+                  </div>
+                  <div className="form-group">
+                    <label>Phone</label>
+                    <input
+                      type="tel"
+                      className="form-control"
+                      value={contactForm.phone}
+                      onChange={(e)=> onContactChange('phone', e.target.value)}
+                      placeholder="+91 12345 67890"
+                    />
+                    {contactErrors.phone && <small style={{ color: '#ef4444' }}>{contactErrors.phone}</small>}
+                  </div>
+                  <div className="form-group">
+                    <label>Category</label>
+                    <select
+                      className="form-control"
+                      value={contactForm.category}
+                      onChange={(e)=> onContactChange('category', e.target.value)}
+                    >
+                      <option>General</option>
+                      <option>Services</option>
+                      <option>Sales</option>
+                      <option>Support</option>
+                      <option>Careers</option>
+                    </select>
+                  </div>
+                  <div className="form-group form-full-width">
+                    <label>Subject</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      value={contactForm.subject}
+                      onChange={(e)=> onContactChange('subject', e.target.value)}
+                      placeholder="How can we help?"
+                      required
+                    />
+                    {contactErrors.subject && <small style={{ color: '#ef4444' }}>{contactErrors.subject}</small>}
+                  </div>
+                  <div className="form-group form-full-width">
+                    <label>Message</label>
+                    <textarea
+                      className="form-control"
+                      rows="5"
+                      value={contactForm.message}
+                      onChange={(e)=> onContactChange('message', e.target.value)}
+                      placeholder="Tell us about your project or question"
+                      required
+                    />
+                    {contactErrors.message && <small style={{ color: '#ef4444' }}>{contactErrors.message}</small>}
+                  </div>
+                  <div className="form-group form-full-width" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                    <input
+                      id="contact-consent"
+                      type="checkbox"
+                      checked={contactForm.consent}
+                      onChange={(e)=> onContactChange('consent', e.target.checked)}
+                    />
+                    <label htmlFor="contact-consent" style={{ margin: 0 }}>I agree to be contacted by Growmore IT Services</label>
+                    {contactErrors.consent && <small style={{ color: '#ef4444' }}>{contactErrors.consent}</small>}
+                  </div>
+                </div>
+                <button type="submit" className="btn btn-primary">Send Message</button>
+              </form>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="footer">
-        <div className="container" style={{display:'grid', gap:12}}>
-          <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', flexWrap:'wrap', gap:12}}>
-            <a href="/" aria-label="Home"><img src="/Growmore1.jpg" alt="Growmore IT" style={{height:32}}/></a>
-            <div style={{display:'flex', gap:12}}>
-            <a className="social-link" href="https://instagram.com" aria-label="Instagram" target="_blank" rel="noreferrer">⌾</a>
-            <a className="social-link" href="https://www.linkedin.com" aria-label="LinkedIn" target="_blank" rel="noreferrer">in</a>
-              <a className="social-link" href="https://facebook.com" aria-label="Facebook" target="_blank" rel="noreferrer">f</a>
-            </div>
+      {/* Search Modal */}
+      {showSearch && (
+        <div className="modal-overlay" onClick={() => setShowSearch(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setShowSearch(false)}>×</button>
+            <h2>Search</h2>
+            <form className="login-form" onSubmit={(e)=>{ e.preventDefault(); setShowSearch(false); navigate('/inquiry'); }}>
+              <div className="form-group">
+                <label>What are you looking for?</label>
+                <input type="text" className="form-control" placeholder="Type to search…" autoFocus />
+              </div>
+              <button type="submit" className="btn btn-primary">Search</button>
+            </form>
           </div>
-          <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:8}}>
-            <button onClick={() => setShowLoginModal(true)} className="footer-login-link" aria-label="Open login">Intern / Employee Login</button>
-            <div style={{display:'flex', gap:12}}>
-              <a href="/" style={{color:'var(--text-secondary)'}}>Privacy</a>
-              <a href="/" style={{color:'var(--text-secondary)'}}>Terms</a>
-            </div>
-          </div>
-          <p style={{color:'var(--text-secondary)', margin:0}}>&copy; 2025 Growmore IT Services. All rights reserved.</p>
         </div>
-      </footer>
+      )}
+
+      {/* Premium Footer */}
+      <SiteFooter />
 
       {/* Project Idea Modal */}
       {showIdeaModal && (

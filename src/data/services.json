@@ -7,6 +7,8 @@
     "excerpt": "Modern, responsive, growth‑focused websites.",
     "shortDesc": "We create modern, responsive, and growth-focused websites that make your business stand out online.",
     "description": "Our web development services focus on performance, accessibility, and engaging user experiences. From design to deployment, we deliver resilient and scalable solutions tailored to your brand and audience.",
+    "longDescription": "From landing pages to enterprise-grade platforms, we engineer accessible, SEO-optimized, and blazing-fast web experiences. Our teams specialize in React, Next.js, and headless CMS architectures that scale globally and convert visitors into customers.",
+    "theme": "#6366F1",
     "features": ["Custom websites", "SEO & performance", "CMS & forms", "Hosting & maintenance"],
     "images": [
       "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=1200&auto=format&fit=crop",
@@ -23,6 +25,8 @@
     "excerpt": "Engaging, high‑performance Android & iOS apps.",
     "shortDesc": "Engaging, high-performance mobile apps designed to connect businesses with their customers.",
     "description": "We build intuitive, scalable mobile apps that delight users and drive results. From MVPs to full‑featured products, we handle the entire lifecycle.",
+    "longDescription": "We craft native and cross-platform apps with delightful UX, real-time analytics, and secure infrastructure. Our approach spans discovery to deployment, ensuring consistent performance and reliability across devices.",
+    "theme": "#22C55E",
     "features": ["Android & iOS", "Push & analytics", "Scalable backends", "App Store/Play deployment"],
     "images": [
       "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=1200&auto=format&fit=crop",
@@ -39,6 +43,8 @@
     "excerpt": "Strategy, roadmaps, and architecture.",
     "shortDesc": "Strategic guidance to make the right technology decisions for growth.",
     "description": "We analyze your processes, identify opportunities, and craft pragmatic roadmaps for sustainable digital transformation.",
+    "longDescription": "Accelerate your transformation with architecture reviews, cloud strategy, and data roadmaps. We align stakeholders, reduce risk, and unlock measurable ROI with pragmatic, outcome-driven guidance.",
+    "theme": "#06B6D4",
     "features": ["Process automation", "Cloud strategy", "Security & compliance", "Cost optimization"],
     "images": [
       "https://images.unsplash.com/photo-1526378722484-bd91ca387e72?q=80&w=1200&auto=format&fit=crop",
@@ -55,6 +61,8 @@
     "excerpt": "Tailored systems for operations & growth.",
     "shortDesc": "Custom digital systems to automate tasks and accelerate growth.",
     "description": "From ERP/CRM to custom dashboards, we build secure, cloud‑ready solutions that improve productivity and decision‑making.",
+    "longDescription": "We design, build, and integrate bespoke platforms that unify data and automate workflows. Secure, scalable, and designed for measurable impact across your org.",
+    "theme": "#F59E0B",
     "features": ["ERP/CRM", "Dashboards", "Integrations", "Automation"],
     "images": [
       "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop",

@@ -104,15 +104,15 @@
 
 @media (min-width: 1024px) {
   .login-container {
-    justify-content: flex-end;
-    background: transparent;
-    backdrop-filter: none;
+    justify-content: center;
+    background: rgba(0,0,0,.5);
+    backdrop-filter: blur(4px);
   }
   .login-card {
     max-width: 420px;
-    height: 100vh;
-    max-height: none;
-    border-radius: 0;
-    border-left: 1px solid rgba(255,255,255,0.08);
+    height: auto;
+    max-height: 90vh;
+    border-radius: 16px;
+    border-left: none;
   }
 }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './MegaMenu.css';
+import { Search, Sun, Moon, User } from 'lucide-react';
 
 const NAV_ITEMS = [
   {
@@ -61,7 +62,7 @@ const NAV_ITEMS = [
   }
 ];
 
-const MegaMenu = ({ onLogoClick, onToggleSearch, onToggleTheme, theme, onNavigate }) => {
+const MegaMenu = ({ onLogoClick, onToggleSearch, onToggleTheme, onLogin, theme, onNavigate }) => {
   const [openPanel, setOpenPanel] = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -117,9 +118,14 @@ const MegaMenu = ({ onLogoClick, onToggleSearch, onToggleTheme, theme, onNavigat
         </nav>
         <div className="mm-actions">
           <button className="mm-action" onClick={onToggleTheme} title="Toggle theme" aria-label="Toggle theme">
-            {theme === 'dark' ? '☀️' : '🌙'}
+            {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
           </button>
-          <button className="mm-action" onClick={onToggleSearch} title="Search" aria-label="Search">🔎</button>
+          <button className="mm-action" onClick={onToggleSearch} title="Search" aria-label="Search">
+            <Search size={16} />
+          </button>
+          <button className="mm-action" onClick={() => onLogin && onLogin()} title="Login" aria-label="Login">
+            <User size={16} />
+          </button>
           <button className="mm-burger" onClick={() => setMobileOpen(v => !v)} aria-label="Menu">
             {mobileOpen ? '✕' : '☰'}
           </button>

@@ -1,5 +1,6 @@
 import React from 'react';
 import './SiteFooter.css';
+import { Instagram, Linkedin, Facebook } from 'lucide-react';
 
 const columns = [
   {
@@ -32,6 +33,12 @@ const SiteFooter = () => {
   return (
     <footer className="sf-footer">
       <div className="sf-top">
+        <div className="sf-col">
+          <a href="/" aria-label="Home" className="sf-logo">
+            <img src="/Growmore1.jpg" alt="Growmore IT" />
+          </a>
+          <p className="sf-tagline">Enterprise-grade solutions for web, mobile, cloud and AI.</p>
+        </div>
         {columns.map((c, idx) => (
           <div key={idx} className="sf-col">
             <h4>{c.heading}</h4>
@@ -45,12 +52,13 @@ const SiteFooter = () => {
         <div className="sf-col">
           <h4>Follow Us</h4>
           <div className="sf-socials">
-            <a href="https://instagram.com" aria-label="Instagram" target="_blank" rel="noreferrer" className="sf-social">📷</a>
-            <a href="https://www.linkedin.com" aria-label="LinkedIn" target="_blank" rel="noreferrer" className="sf-social">in</a>
-            <a href="https://facebook.com" aria-label="Facebook" target="_blank" rel="noreferrer" className="sf-social">f</a>
+            <a href="https://instagram.com" aria-label="Instagram" target="_blank" rel="noreferrer" className="sf-social"><Instagram size={16} /></a>
+            <a href="https://www.linkedin.com" aria-label="LinkedIn" target="_blank" rel="noreferrer" className="sf-social"><Linkedin size={16} /></a>
+            <a href="https://facebook.com" aria-label="Facebook" target="_blank" rel="noreferrer" className="sf-social"><Facebook size={16} /></a>
           </div>
         </div>
       </div>
+      <div className="sf-divider" />
       <div className="sf-bottom">
         <div className="sf-legal">© 2025 Growmore IT Services. All rights reserved.</div>
         <div className="sf-terms">

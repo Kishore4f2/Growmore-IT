@@ -3,6 +3,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import './Home.css';
 import services from '../data/services.json';
 import ServiceCarousel from '../components/ServiceCarousel';
+import ParticleField from '../components/Background/ParticleField';
+import Blobs from '../components/Background/Blobs';
+import Reveal from '../components/Section/Reveal';
+import { CheckCircle2, ArrowLeft } from 'lucide-react';
 
 const ServiceDetail = () => {
   const { slug } = useParams();
@@ -18,41 +22,72 @@ const ServiceDetail = () => {
     );
   }
 
+  const themeColor = service.theme || '#6366F1';
+
   return (
     <div className="home-container dark">
-      <section className="services-section" style={{ marginTop: 24 }}>
+      <section className="hero-section with-blur-bg" style={{ minHeight: '40vh', marginTop: 16 }}>
+        <div className="hero-background" style={{ backgroundImage: `url('${service.images?.[0]}')` }} />
+        <Blobs />
+        <ParticleField density={36} />
         <div className="container">
-          <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center' }}>
-            <h2 className="section-title" style={{ marginBottom: 8 }}>{service.title}</h2>
-            <button className="btn btn-secondary" onClick={() => navigate('/')}>← Back to Home</button>
-          </div>
-
-          <div style={{ marginTop: 16 }}>
-            <ServiceCarousel images={service.images || []} height={260} ariaLabel={`${service.title} gallery`} />
-          </div>
-
-          <div className="inquiry-form-container" style={{ marginTop: 24 }}>
-            <h3>Interested in {service.title}?</h3>
-            <div style={{ marginBottom: 16 }}>
-              <p style={{ color: 'var(--text-secondary)' }}>{service.description}</p>
-              {service.features && service.features.length > 0 && (
-                <ul style={{ paddingLeft: 18 }}>
-                  {service.features.map((f, i) => <li key={i}>• {f}</li>)}
-                </ul>
-              )}
+          <Reveal>
+            <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap: 12 }}>
+              <h1 className="hero-title" style={{ margin: 0 }}>{service.title}</h1>
+              <button className="btn btn-secondary" onClick={() => navigate('/')} aria-label="Back to Home">
+                <ArrowLeft size={18} style={{ marginRight: 8 }} /> Back
+              </button>
             </div>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="hero-subtitle" style={{ maxWidth: 820 }}>{service.longDescription || service.description}</p>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="services-section with-blur-bg" style={{ marginTop: 12 }}>
+        <div className="container">
+          <Reveal>
+            <ServiceCarousel images={service.images || []} height={320} ariaLabel={`${service.title} gallery`} />
+          </Reveal>
+
+          <div className="inquiry-form-container" style={{ marginTop: 24, borderTop: `3px solid ${themeColor}22` }}>
+            <Reveal>
+              <h3>Key Features</h3>
+            </Reveal>
+            <div style={{ display:'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16, marginBottom: 24 }}>
+              {(service.features || []).map((f, i) => (
+                <Reveal key={i} delay={i * 0.05}>
+                  <div style={{
+                    display:'flex', alignItems:'flex-start', gap: 10,
+                    background: 'var(--bg-primary)', border: '1px solid var(--border-color)',
+                    borderRadius: 12, padding: 14, boxShadow: '0 8px 20px var(--shadow)'
+                  }}>
+                    <CheckCircle2 color={themeColor} size={18} style={{ marginTop: 2 }} aria-hidden="true" />
+                    <span style={{ color: 'var(--text-secondary)' }}>{f}</span>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+
+            <Reveal>
+              <h3>Request More Details</h3>
+              <p style={{ color: 'var(--text-secondary)', marginBottom: 16 }}>
+                Tell us a few details and our team will reach out shortly.
+              </p>
+            </Reveal>
             <form className="inquiry-form" onSubmit={(e)=>{e.preventDefault(); alert('We will contact you shortly.');}}>
               <div className="form-group">
                 <label>Name:</label>
-                <input type="text" className="form-control" placeholder="Enter your name" required />
+                <input type="text" className="form-control" placeholder="Enter your name" required aria-label="Your name" />
               </div>
               <div className="form-group">
                 <label>Email:</label>
-                <input type="email" className="form-control" placeholder="Enter your email" required />
+                <input type="email" className="form-control" placeholder="Enter your email" required aria-label="Your email" />
               </div>
               <div className="form-group">
                 <label>Message:</label>
-                <textarea className="form-control" rows="4" placeholder="Tell us about your needs"></textarea>
+                <textarea className="form-control" rows="4" placeholder="Tell us about your needs" aria-label="Message"></textarea>
               </div>
               <button type="submit" className="btn btn-primary">Request Details</button>
             </form>
@@ -66,3 +101,4 @@ const ServiceDetail = () => {
 export default ServiceDetail;
 
 
+ 

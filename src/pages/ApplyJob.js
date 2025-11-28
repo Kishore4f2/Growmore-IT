@@ -17,6 +17,17 @@ const ApplyJob = () => {
             <h2 className="section-title" style={{ marginBottom: 8 }}>Apply for Job</h2>
             <button className="btn btn-secondary" onClick={() => navigate('/')}>← Back to Home</button>
           </div>
+
+          {/* Compact HD banner with subtle animated sidebar overlay */}
+          <div style={{ position: 'relative', height: 160, borderRadius: 16, overflow: 'hidden', marginTop: 6, boxShadow: '0 10px 30px var(--shadow)' }} aria-hidden="true">
+            <img
+              src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop"
+              alt="Careers banner"
+              loading="lazy"
+              style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(.9)' }}
+            />
+            <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: 120, background: 'linear-gradient(180deg, rgba(99,102,241,.25), rgba(99,102,241,.05))', backdropFilter: 'blur(6px)' }} />
+          </div>
           <div className="job-form-container">
             <h3>Job Application Form</h3>
             <form className="job-form" onSubmit={(e)=>{e.preventDefault(); alert('Job application submitted.')}}>
