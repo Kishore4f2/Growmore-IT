@@ -4,6 +4,7 @@ import './App.css';
 
 // Pages
 import Home from './pages/Home';
+import Insights from './pages/Insights';
 import AdminLogin from './pages/AdminLogin';
 import EmployeeLogin from './pages/EmployeeLogin';
 import InternLogin from './pages/InternLogin';
@@ -22,7 +23,7 @@ import ApplyJob from './pages/ApplyJob';
 
 function App() {
   return (
-    <Router>
+    <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/internship/paid" element={<PaidInternship />} />
@@ -35,6 +36,7 @@ function App() {
         <Route path="/employee/register" element={<EmployeeRegister />} />
         <Route path="/intern/apply" element={<InternApply />} />
         <Route path="/services/:slug" element={<ServiceDetail />} />
+        <Route path="/insights" element={<Insights />} />
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/employee/dashboard" element={<EmployeeDashboard />} />
         <Route path="/intern/dashboard" element={<InternDashboard />} />

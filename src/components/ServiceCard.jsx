@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import ServiceCarousel from './ServiceCarousel';
 import './ServiceCard.css';
 
 const ServiceCard = ({ service, onClickCard, onVisit }) => {
   const { title, shortDesc, images, icon } = service;
   const [ripples, setRipples] = useState([]);
+  const FALLBACK =
+    'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1600&auto=format&fit=crop';
+  const firstImage = Array.isArray(images) && images.length > 0 ? images[0] : FALLBACK;
+  const [imgSrc, setImgSrc] = useState(firstImage);
 
   const addRipple = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -24,7 +27,16 @@ const ServiceCard = ({ service, onClickCard, onVisit }) => {
       {ripples.map(r => (
         <span key={r.id} className="svc-ripple" style={{ left: r.x, top: r.y }} />
       ))}
-      <ServiceCarousel images={images} ariaLabel={`${title} screenshots`} />
+      <div className="svc-wrap" style={{ height: 220 }} aria-label={`${title} image`}>
+        <div className="svc-slide">
+          <img
+            src={imgSrc}
+            loading="lazy"
+            alt={`${title} visual`}
+            onError={() => setImgSrc(FALLBACK)}
+          />
+        </div>
+      </div>
       <div className="svc-body">
         <div className="svc-head">
           <div className="svc-icon" aria-hidden="true">{icon}</div>

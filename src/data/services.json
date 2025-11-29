@@ -36,6 +36,61 @@
     ]
   },
   {
+    "id": 5,
+    "slug": "software-development",
+    "icon": "🧩",
+    "title": "Software Development",
+    "excerpt": "Custom software engineered for scale.",
+    "shortDesc": "Full‑stack engineering for bespoke products and internal tools.",
+    "description": "From architecture to delivery, we build robust software that fits your business.",
+    "longDescription": "APIs, microservices, integrations, and data pipelines—delivered with quality gates, CI/CD, and observability.",
+    "theme": "#0EA5E9",
+    "features": ["Microservices", "APIs & Integrations", "Quality Engineering", "DevOps & CI/CD"],
+    "images": [
+      "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1526372295303-67e8c18a3f91?q=80&w=1600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?q=80&w=1600&auto=format&fit=crop"
+    ]
+  },
+  {
+    "id": 6,
+    "slug": "cloud-hosting-solutions",
+    "icon": "☁️",
+    "title": "Cloud & Hosting",
+    "excerpt": "Reliable, secure, and cost‑efficient cloud operations.",
+    "shortDesc": "Design, migrate, and operate on AWS/Azure/GCP with confidence.",
+    "description": "We optimize infra for performance and cost while ensuring security and compliance.",
+    "longDescription": "Landing zones, IaC, autoscaling, backup/DR, observability—everything you need to run smoothly.",
+    "theme": "#14B8A6",
+    "features": ["Cloud migration", "Kubernetes", "IaC (Terraform)", "Monitoring & DR"],
+    "images": [
+      "https://images.unsplash.com/photo-1496096265110-f83ad7f96608?q=80&w=1600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?q=80&w=1600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?q=80&w=1600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop"
+    ]
+  },
+  {
+    "id": 7,
+    "slug": "maintenance-support",
+    "icon": "🛠️",
+    "title": "Maintenance & Support",
+    "excerpt": "SLA‑backed support to keep systems healthy.",
+    "shortDesc": "L2/L3 support, bug fixes, and enhancements with clear SLAs.",
+    "description": "We keep your apps secure, performant, and up to date.",
+    "longDescription": "Release management, patching, monitoring, and 24×7 support options.",
+    "theme": "#F59E0B",
+    "features": ["Bug fixing", "Preventive maintenance", "SLA coverage", "Proactive monitoring"],
+    "images": [
+      "https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1526378722484-bd91ca387e72?q=80&w=1600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=1600&auto=format&fit=crop"
+    ]
+  },
+  {
     "id": 3,
     "slug": "it-consulting",
     "icon": "🧠",
@@ -69,6 +124,24 @@
       "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1545235617-9465d2a55698?q=80&w=1200&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop"
+    ]
+  },
+  {
+    "id": 8,
+    "slug": "ai-automation-solutions",
+    "icon": "🤖",
+    "title": "AI & Automation",
+    "excerpt": "Intelligent automation to accelerate outcomes.",
+    "shortDesc": "From copilots to RPA—unlock productivity with AI.",
+    "description": "We apply practical AI for measurable business impact.",
+    "longDescription": "Data pipelines, model orchestration, and secure deployment aligned to your governance.",
+    "theme": "#8B5CF6",
+    "features": ["GenAI copilots", "Chatbots", "RPA & workflows", "MLOps"],
+    "images": [
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1555255707-c07966088b7b?q=80&w=1600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop"
     ]
   }
 ]

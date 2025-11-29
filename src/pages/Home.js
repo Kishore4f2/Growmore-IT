@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import CountUp from 'react-countup';
 import { useNavigate } from 'react-router-dom';
 import './Home.css';
 
 import servicesData from '../data/services.json';
 import ServiceCard from '../components/ServiceCard';
-import HeroCarousel from '../components/Hero/HeroCarousel';
+import BootstrapHero from '../components/Hero/BootstrapHero';
 import MegaMenu from '../components/Header/MegaMenu';
 import ParticleField from '../components/Background/ParticleField';
 import Blobs from '../components/Background/Blobs';
@@ -127,8 +128,8 @@ const Home = () => {
     7: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop',
     8: 'https://images.unsplash.com/photo-1515169067865-5387ec356754?q=80&w=1200&auto=format&fit=crop',
     9: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=1200&auto=format&fit=crop',
-    10:'https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1200&auto=format&fit=crop',
-    11:'https://images.unsplash.com/photo-1508385082359-f38ae991e8f2?q=80&w=1200&auto=format&fit=crop'
+    10: 'https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1200&auto=format&fit=crop',
+    11: 'https://images.unsplash.com/photo-1508385082359-f38ae991e8f2?q=80&w=1200&auto=format&fit=crop'
   };
 
   const aboutImage = 'https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=1200&auto=format&fit=crop';
@@ -144,6 +145,29 @@ const Home = () => {
     { name: 'Owner One', title: 'Owner', img: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop' },
     { name: 'Owner Two', title: 'Owner', img: 'https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=800&auto=format&fit=crop' }
   ];
+  const growLeftRef = React.useRef(null);
+  const [growH, setGrowH] = React.useState(360);
+  React.useEffect(() => {
+    const calc = () => {
+      if (growLeftRef.current) {
+        const h = growLeftRef.current.scrollHeight || growLeftRef.current.offsetHeight || 360;
+        setGrowH(Math.max(360, Math.round(h)));
+      }
+    };
+    requestAnimationFrame(calc);
+    let ro;
+    if (window.ResizeObserver) {
+      ro = new ResizeObserver(calc);
+      if (growLeftRef.current) ro.observe(growLeftRef.current);
+    }
+    window.addEventListener('resize', calc);
+    window.addEventListener('load', calc);
+    return () => {
+      window.removeEventListener('resize', calc);
+      window.removeEventListener('load', calc);
+      if (ro) ro.disconnect();
+    };
+  }, []);
 
   // Contact form state and handlers
   const [contactForm, setContactForm] = useState({
@@ -199,16 +223,16 @@ const Home = () => {
       {/* Premium Header */}
       <MegaMenu
         onLogoClick={() => navigate('/admin/login')}
-        onToggleSearch={() => setShowSearch(true)}
+        onToggleSearch={undefined}
         onToggleTheme={() => setTheme(prev => prev === 'dark' ? 'light' : 'dark')}
         onLogin={() => setShowLoginModal(true)}
         theme={theme}
         onNavigate={(to) => navigate(to)}
       />
 
-      {/* Infosys-style Hero Carousel with animated background */}
-      <section id="home" className="hero-section with-blur-bg" style={{ minHeight: '100vh', margin: 0, padding: 0, position: 'relative', zIndex: 0 }}>
-        <HeroCarousel onPrimary={() => scrollToSection('services')} />
+      {/* Premium Bootstrap Hero Carousel */}
+      <section id="home" className="hero-section" style={{ minHeight: '80vh', margin: 0, padding: 0 }}>
+        <BootstrapHero />
       </section>
 
       {/* About Section - compact, premium blend background with reveal */}
@@ -230,15 +254,21 @@ const Home = () => {
                 </p>
                 <div className="about-stats">
                   <div className="stat-card">
-                    <div className="stat-number">500+</div>
+                    <div className="stat-number">
+                      <CountUp end={500} duration={2.5} suffix="+" enableScrollSpy scrollSpyOnce />
+                    </div>
                     <div className="stat-label">Projects Completed</div>
                   </div>
                   <div className="stat-card">
-                    <div className="stat-number">200+</div>
+                    <div className="stat-number">
+                      <CountUp end={200} duration={2.5} suffix="+" enableScrollSpy scrollSpyOnce />
+                    </div>
                     <div className="stat-label">Happy Clients</div>
                   </div>
                   <div className="stat-card">
-                    <div className="stat-number">50+</div>
+                    <div className="stat-number">
+                      <CountUp end={50} duration={2.5} suffix="+" enableScrollSpy scrollSpyOnce />
+                    </div>
                     <div className="stat-label">Team Members</div>
                   </div>
                 </div>
@@ -316,7 +346,7 @@ const Home = () => {
         <div className="container">
           <Reveal><h2 className="section-title">LET'S GROW TOGETHER</h2></Reveal>
           <div className="grow-together-content">
-            <div className="grow-together-left">
+            <div className="grow-together-left" ref={growLeftRef}>
               <Reveal><div className="grow-box" onClick={() => navigate('/inquiry')}>
                 <h3>1️⃣ Inquiry</h3>
                 <p>Have questions? Get in touch with us</p>
@@ -330,10 +360,39 @@ const Home = () => {
                 <p>Join our team and grow with us</p>
               </div></Reveal>
             </div>
-            <div className="grow-together-right">
-              <div style={{ maxWidth: 420, marginLeft: 'auto', width: '100%' }}>
-                <ServiceCarousel images={growGallery} height={200} ariaLabel="Company culture and workspace" />
-              </div>
+            <div className="grow-together-right" style={{ position: 'relative' }}>
+              <aside style={{ position: 'sticky', top: 24, alignSelf: 'start', height: growH }} aria-label="Grow gallery">
+                <div id="growCarousel" className="carousel slide" data-bs-ride="carousel" style={{ height: '100%', borderRadius: 16, overflow: 'hidden', boxShadow: '0 10px 24px var(--shadow)' }}>
+                  <div className="carousel-indicators">
+                    {growGallery.map((_, i) => (
+                      <button
+                        key={i}
+                        type="button"
+                        data-bs-target="#growCarousel"
+                        data-bs-slide-to={i}
+                        className={i === 0 ? 'active' : ''}
+                        aria-current={i === 0 ? 'true' : undefined}
+                        aria-label={`Slide ${i + 1}`}
+                      />
+                    ))}
+                  </div>
+                  <div className="carousel-inner" style={{ height: '100%' }}>
+                    {growGallery.map((src, i) => (
+                      <div key={i} className={`carousel-item ${i === 0 ? 'active' : ''}`} style={{ height: '100%' }}>
+                        <img src={src} className="d-block w-100" alt={`Grow visual ${i + 1}`} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} loading="lazy" />
+                      </div>
+                    ))}
+                  </div>
+                  <button className="carousel-control-prev" type="button" data-bs-target="#growCarousel" data-bs-slide="prev">
+                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span className="visually-hidden">Previous</span>
+                  </button>
+                  <button className="carousel-control-next" type="button" data-bs-target="#growCarousel" data-bs-slide="next">
+                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span className="visually-hidden">Next</span>
+                  </button>
+                </div>
+              </aside>
             </div>
           </div>
         </div>
@@ -343,7 +402,7 @@ const Home = () => {
       <section id="team-letters" className="owners-section with-blur-bg">
         <div className="container">
           <h2 className="section-title">Team & Letters</h2>
-          <div style={{ display:'flex', justifyContent:'center', gap:12, marginBottom:16 }}>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: 12, marginBottom: 16 }}>
             <button
               className="btn btn-secondary"
               onClick={() => setInfoTab('owners')}
@@ -423,7 +482,7 @@ const Home = () => {
                       type="text"
                       className="form-control"
                       value={contactForm.name}
-                      onChange={(e)=> onContactChange('name', e.target.value)}
+                      onChange={(e) => onContactChange('name', e.target.value)}
                       placeholder="Your full name"
                       required
                     />
@@ -435,7 +494,7 @@ const Home = () => {
                       type="email"
                       className="form-control"
                       value={contactForm.email}
-                      onChange={(e)=> onContactChange('email', e.target.value)}
+                      onChange={(e) => onContactChange('email', e.target.value)}
                       placeholder="you@company.com"
                       required
                     />
@@ -447,7 +506,7 @@ const Home = () => {
                       type="tel"
                       className="form-control"
                       value={contactForm.phone}
-                      onChange={(e)=> onContactChange('phone', e.target.value)}
+                      onChange={(e) => onContactChange('phone', e.target.value)}
                       placeholder="+91 12345 67890"
                     />
                     {contactErrors.phone && <small style={{ color: '#ef4444' }}>{contactErrors.phone}</small>}
@@ -457,7 +516,7 @@ const Home = () => {
                     <select
                       className="form-control"
                       value={contactForm.category}
-                      onChange={(e)=> onContactChange('category', e.target.value)}
+                      onChange={(e) => onContactChange('category', e.target.value)}
                     >
                       <option>General</option>
                       <option>Services</option>
@@ -472,7 +531,7 @@ const Home = () => {
                       type="text"
                       className="form-control"
                       value={contactForm.subject}
-                      onChange={(e)=> onContactChange('subject', e.target.value)}
+                      onChange={(e) => onContactChange('subject', e.target.value)}
                       placeholder="How can we help?"
                       required
                     />
@@ -484,7 +543,7 @@ const Home = () => {
                       className="form-control"
                       rows="5"
                       value={contactForm.message}
-                      onChange={(e)=> onContactChange('message', e.target.value)}
+                      onChange={(e) => onContactChange('message', e.target.value)}
                       placeholder="Tell us about your project or question"
                       required
                     />
@@ -495,7 +554,7 @@ const Home = () => {
                       id="contact-consent"
                       type="checkbox"
                       checked={contactForm.consent}
-                      onChange={(e)=> onContactChange('consent', e.target.checked)}
+                      onChange={(e) => onContactChange('consent', e.target.checked)}
                     />
                     <label htmlFor="contact-consent" style={{ margin: 0 }}>I agree to be contacted by Growmore IT Services</label>
                     {contactErrors.consent && <small style={{ color: '#ef4444' }}>{contactErrors.consent}</small>}
@@ -508,22 +567,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Search Modal */}
-      {showSearch && (
-        <div className="modal-overlay" onClick={() => setShowSearch(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={() => setShowSearch(false)}>×</button>
-            <h2>Search</h2>
-            <form className="login-form" onSubmit={(e)=>{ e.preventDefault(); setShowSearch(false); navigate('/inquiry'); }}>
-              <div className="form-group">
-                <label>What are you looking for?</label>
-                <input type="text" className="form-control" placeholder="Type to search…" autoFocus />
-              </div>
-              <button type="submit" className="btn btn-primary">Search</button>
-            </form>
-          </div>
-        </div>
-      )}
+      {/* Inline navbar search is handled inside MegaMenu */}
 
       {/* Premium Footer */}
       <SiteFooter />
@@ -567,7 +611,7 @@ const Home = () => {
               <div className="form-group">
                 <label>Technology Stack:</label>
                 <div className="stack-options">
-                  {['Flutter','React','Node.js','Python','Java','PHP','MySQL','MongoDB'].map((tech) => (
+                  {['Flutter', 'React', 'Node.js', 'Python', 'Java', 'PHP', 'MySQL', 'MongoDB'].map((tech) => (
                     <label key={tech} className={`stack-chip ${ideaForm.stack.includes(tech) ? 'selected' : ''}`}>
                       <input
                         type="checkbox"

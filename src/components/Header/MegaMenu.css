@@ -1,149 +1,487 @@
+/* MegaMenu.css */
 .mm-header {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  background: rgba(17, 24, 39, 0.6);
-  border-bottom: 1px solid var(--border-color);
-}
-
-.light .mm-header {
-  background: rgba(255, 255, 255, 0.85);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .mm-bar {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: 16px;
-  padding: 12px 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.mm-logo img {
-  height: 36px;
-  display: block;
+    max-width: 1400px;
+    margin: 0 auto;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    position: relative;
 }
 
 .mm-logo {
-  background: transparent;
-  border: none;
-  cursor: pointer;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
 }
 
-.mm-nav {
-  display: flex;
-  gap: 20px;
-  position: relative;
+.mm-logo img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* Desktop Nav */
+.mm-nav-desktop {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 100%;
 }
 
 .mm-item {
-  position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
 }
 
 .mm-link {
-  background: transparent;
-  border: none;
-  color: var(--text-primary);
-  font-weight: 600;
-  padding: 10px 8px;
-  cursor: pointer;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    padding: 8px 16px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
 }
 
+.mm-link:hover,
+.mm-item.active .mm-link {
+    color: var(--primary);
+    background: rgba(var(--primary-rgb), 0.08);
+    opacity: 1;
+}
+
+.mm-chevron {
+    transition: transform 0.2s ease;
+    opacity: 0.6;
+}
+
+.mm-chevron.rotate {
+    transform: rotate(180deg);
+}
+
+.mm-chevron.rotate-90 {
+    transform: rotate(90deg);
+}
+
+/* Mega Panel */
 .mm-panel {
-  position: absolute;
-  left: 0;
-  top: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(220px, 1fr));
-  gap: 24px;
-  padding: 24px;
-  background: var(--bg-primary);
-  border: 1px solid var(--border-color);
-  box-shadow: 0 20px 60px var(--shadow);
-  border-radius: 14px;
-  min-width: 720px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    padding: 32px 0;
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    z-index: 1200; /* ensure panel appears above other content */
+}
+
+.mm-col {
+    min-width: 200px;
 }
 
 .mm-col h4 {
-  color: var(--text-primary);
-  margin: 0 0 12px 0;
-  font-size: 14px;
-  opacity: .9;
-  text-transform: uppercase;
-  letter-spacing: .5px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    font-weight: 600;
 }
 
 .mm-col ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: grid;
-  gap: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .mm-panel-link {
-  width: 100%;
-  text-align: left;
-  padding: 8px 10px;
-  background: transparent;
-  border: 1px solid transparent;
-  border-radius: 8px;
-  color: var(--text-secondary);
-  cursor: pointer;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-size: 1rem;
+    color: var(--text-primary);
+    padding: 0;
+    transition: color 0.2s ease;
 }
 
 .mm-panel-link:hover {
-  color: var(--text-primary);
-  border-color: var(--border-color);
-  background: var(--bg-secondary);
+    color: var(--primary);
 }
 
+/* Actions */
 .mm-actions {
-  display: flex;
-  gap: 8px;
-  align-items: center;
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 .mm-action {
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border-color);
-  color: var(--text-primary);
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  cursor: pointer;
+    background: none;
+    border: 1px solid var(--border);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.mm-action:hover {
+    background: var(--bg-hover);
+    border-color: var(--primary);
+    color: var(--primary);
 }
 
 .mm-burger {
-  display: none;
-  background: transparent;
-  border: none;
-  color: var(--text-primary);
-  font-size: 20px;
-  cursor: pointer;
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Alignment fixes: ensure burger and action icons are perfectly centered and stable */
+.mm-burger,
+.mm-action {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Make sure SVG/img content inside action buttons renders crisply and is centered */
+.mm-action svg,
+.mm-burger svg,
+.mm-logo img {
+    display: block;
+    vertical-align: middle;
+}
+
+/* Search Bar */
+.mm-search-bar {
+    position: absolute;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--bg-card);
+    border: 1px solid var(--primary);
+    border-radius: 24px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.mm-search-bar input {
+    border: none;
+    background: none;
+    outline: none;
+    width: 100%;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+}
+
+.mm-search-close {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 4px;
+}
+
+.mm-search-close:hover {
+    color: var(--text-primary);
+}
+
+/* Mobile */
+.mm-mobile-overlay {
+    position: fixed;
+    /* full viewport overlay for a standard mobile menu experience */
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 2147483646 !important;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    /* prevent the overlay itself from scrolling; scroll inside the menu content only */
+    overflow: hidden;
+    display: block !important;
+    visibility: visible !important;
+}
+
+.mm-mobile-menu {
+    /* make menu fixed so it cannot be covered by other positioned elements */
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    background: var(--bg-card);
+    display: flex;
+    flex-direction: column;
+    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.2);
+    /* ensure menu container doesn't create an extra page scrollbar */
+    overflow: hidden;
+    visibility: visible !important;
+    z-index: 2147483647 !important;
+}
+
+.mm-mobile-header {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* center title by default */
+    padding: 0 24px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+}
+
+.mm-mobile-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 auto;
+    text-align: center;
+}
+
+.mm-mobile-close {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    margin-right: 0; /* remove negative offset so icon aligns correctly */
+    /* position the close icon at the right edge of the header */
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.mm-mobile-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Force all mobile menu text and icons to be visible and on top */
+.mm-mobile-menu,
+.mm-mobile-menu * {
+    color: var(--text-primary) !important;
+    opacity: 1 !important;
+}
+
+/* Ensure mobile group buttons/links are visible and clickable */
+.mm-mobile-group-btn,
+.mm-mobile-link {
+    color: var(--text-primary) !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+/* Ensure chevrons and svg icons inside mobile menu use currentColor for visibility */
+.mm-mobile-menu svg {
+    stroke: currentColor !important;
+    fill: none !important;
+}
+
+/* Make mobile group headings and links clearly visible */
+.mm-mobile-group-btn {
+    color: var(--text-primary) !important;
+    opacity: 1 !important;
+    font-size: 1.05rem;
+}
+
+.mm-mobile-link {
+    color: var(--text-primary) !important;
+    opacity: 1 !important;
+    padding-left: 4px;
+}
+
+/* If any mobile submenu is collapsed with height 0, ensure its children remain accessible when expanded */
+.mm-mobile-sub {
+    /* temporary: help debug and ensure submenu content is visible while we fix expansion behavior */
+    will-change: height, opacity;
+    /* Allow contents to be visible even if the container's animated height isn't applied reliably
+       This prevents items from being clipped when framer-motion layout animation doesn't set height
+       correctly in some browsers. We'll remove this override after verification. */
+    overflow: visible !important;
+    display: block;
+    /* visual debug: dashed outline to show submenu bounds (temporary) */
+    outline: 2px dashed rgba(255, 255, 0, 0.12);
+    outline-offset: 6px;
+}
+
+/* Hide default scrollbar visuals for the overlay to reduce visual clutter while keeping menu scrolling accessible */
+.mm-mobile-overlay::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+.mm-mobile-menu::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+/* Ensure menu items are readable when overlay covers header background */
+.mm-mobile-link,
+.mm-mobile-group-btn {
+    color: var(--text-primary);
+}
+
+.mm-mobile-group {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 16px;
+}
+
+.mm-mobile-group-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: 16px 0;
+}
+
+.mm-mobile-sub {
+    /* keep padding, but don't clip contents */
+    padding-left: 16px;
+}
+
+.mm-mobile-col {
+    margin-top: 16px;
+}
+
+.mm-mobile-col h5 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+
+.mm-mobile-link {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    padding: 8px 0;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    cursor: pointer;
 }
 
 @media (max-width: 968px) {
-  .mm-nav {
-    position: fixed;
-    inset: 64px 0 0 0;
-    background: var(--bg-primary);
-    display: grid;
-    gap: 0;
-    padding: 12px 20px;
-    transform: translateY(-8px);
-    border-top: 1px solid var(--border-color);
-    display: none;
-  }
-  .mm-nav.open { display: grid; }
-  .mm-item + .mm-item { border-top: 1px solid var(--border-color); }
-  .mm-panel { position: relative; min-width: unset; grid-template-columns: 1fr; border: none; padding: 12px 0; box-shadow: none; }
-  .mm-burger { display: inline-block; }
+    .mm-nav-desktop {
+        display: none;
+    }
+
+    .mm-burger {
+        display: flex;
+    }
 }
 
+/* Explicitly hide the burger icon on laptop/desktop view to avoid accidental visibility */
+@media (min-width: 969px) {
+    .mm-burger {
+        display: none !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+    }
+}
 
+/* Ensure burger receives pointer events on small screens */
+@media (max-width: 968px) {
+    .mm-burger {
+        pointer-events: auto;
+    }
+}
+
+/* Hover / visibility fixes: keep hovered nav items fully visible and crisp without changing color values */
+.mm-link:hover,
+.mm-item.active .mm-link {
+    /* preserve existing color/background but ensure full opacity and no unwanted filter */
+    opacity: 1 !important;
+    color: var(--primary) !important;
+    background: rgba(var(--primary-rgb), 0.08) !important;
+    text-shadow: none;
+}
+
+/* Prevent icon-only elements from shifting on hover; keep hover visual change only in background/border, not position */
+.mm-action:hover,
+.mm-burger:hover {
+    transform: none !important;
+}
+
+/* When mobile menu overlay is visible, ensure header/action/menu icons remain fully visible and high-contrast
+   Target icons inside the overlay/menu so they render with the primary text color and full opacity. */
+.mm-mobile-overlay .mm-action,
+.mm-mobile-overlay .mm-mobile-close,
+.mm-mobile-overlay .mm-chevron,
+.mm-mobile-overlay .mm-mobile-group-btn,
+.mm-mobile-overlay .mm-mobile-link {
+    color: var(--text-primary) !important;
+    opacity: 1 !important;
+}
+
+/* Ensure SVG icons inside the mobile header and actions inherit currentColor and render crisply */
+.mm-mobile-overlay .mm-action svg,
+.mm-mobile-overlay .mm-mobile-close svg,
+.mm-mobile-overlay .mm-chevron {
+    stroke: currentColor;
+    fill: none;
+}
