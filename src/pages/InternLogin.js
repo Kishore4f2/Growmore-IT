@@ -22,7 +22,7 @@ const InternLogin = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     // Demo login - accept any credentials
     if (formData.loginId && formData.password) {
       localStorage.setItem('internLoggedIn', 'true');
@@ -59,9 +59,9 @@ const InternLogin = () => {
         <div className="login-header">
           <div className="login-icon">
             <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-              <circle cx="30" cy="30" r="30" fill="#F59E0B"/>
-              <path d="M20 25L30 15L40 25V35C40 40 36 44 30 44C24 44 20 40 20 35V25Z" fill="white"/>
-              <path d="M25 30L28 33L35 26" stroke="#F59E0B" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+              <circle cx="30" cy="30" r="30" fill="#F59E0B" />
+              <path d="M20 25L30 15L40 25V35C40 40 36 44 30 44C24 44 20 40 20 35V25Z" fill="white" />
+              <path d="M25 30L28 33L35 26" stroke="#F59E0B" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </div>
           <h1>Intern Login</h1>
@@ -70,7 +70,7 @@ const InternLogin = () => {
 
         <form onSubmit={handleSubmit} className="login-form">
           {error && <div className="error-message">{error}</div>}
-          
+
           <div className="form-group">
             <label className="form-label">Login ID</label>
             <input
@@ -103,7 +103,7 @@ const InternLogin = () => {
 
           <div className="login-footer">
             <p>New to Internship? <Link to="/intern/apply">Apply Here</Link></p>
-            <a href="/" className="back-link">← Back to Home</a>
+            <a href="/" className="back-link">← <span className="btn-text">Back to Home</span></a>
           </div>
         </form>
       </div>

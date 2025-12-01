@@ -17,7 +17,7 @@ const ServiceDetail = () => {
     return (
       <div className="home-container dark" style={{ padding: 40 }}>
         <p>Service not found.</p>
-        <button className="btn btn-secondary" onClick={() => navigate('/')}>← Back to Home</button>
+        <button className="btn btn-secondary" onClick={() => navigate('/')}>← <span className="btn-text">Back to Home</span></button>
       </div>
     );
   }
@@ -32,10 +32,10 @@ const ServiceDetail = () => {
         <ParticleField density={36} />
         <div className="container">
           <Reveal>
-            <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap: 12 }}>
+            <div className="page-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
               <h1 className="hero-title" style={{ margin: 0 }}>{service.title}</h1>
               <button className="btn btn-secondary" onClick={() => navigate('/')} aria-label="Back to Home">
-                <ArrowLeft size={18} style={{ marginRight: 8 }} /> Back
+                <ArrowLeft size={18} style={{ marginRight: 8 }} /> <span className="btn-text">Back</span>
               </button>
             </div>
           </Reveal>
@@ -55,11 +55,11 @@ const ServiceDetail = () => {
             <Reveal>
               <h3>Key Features</h3>
             </Reveal>
-            <div style={{ display:'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16, marginBottom: 24 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16, marginBottom: 24 }}>
               {(service.features || []).map((f, i) => (
                 <Reveal key={i} delay={i * 0.05}>
                   <div style={{
-                    display:'flex', alignItems:'flex-start', gap: 10,
+                    display: 'flex', alignItems: 'flex-start', gap: 10,
                     background: 'var(--bg-primary)', border: '1px solid var(--border-color)',
                     borderRadius: 12, padding: 14, boxShadow: '0 8px 20px var(--shadow)'
                   }}>
@@ -76,7 +76,7 @@ const ServiceDetail = () => {
                 Tell us a few details and our team will reach out shortly.
               </p>
             </Reveal>
-            <form className="inquiry-form" onSubmit={(e)=>{e.preventDefault(); alert('We will contact you shortly.');}}>
+            <form className="inquiry-form" onSubmit={(e) => { e.preventDefault(); alert('We will contact you shortly.'); }}>
               <div className="form-group">
                 <label>Name:</label>
                 <input type="text" className="form-control" placeholder="Enter your name" required aria-label="Your name" />
@@ -101,4 +101,3 @@ const ServiceDetail = () => {
 export default ServiceDetail;
 
 
- 

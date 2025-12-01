@@ -26,11 +26,11 @@ const EmployeeRegister = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     // Demo registration - auto-generate credentials
     const loginId = `EMP${Date.now().toString().slice(-6)}`;
     const password = `PASS${Math.random().toString(36).slice(-8).toUpperCase()}`;
-    
+
     // Store in localStorage (demo)
     const employees = JSON.parse(localStorage.getItem('employees') || '[]');
     employees.push({
@@ -40,9 +40,9 @@ const EmployeeRegister = () => {
       id: Date.now()
     });
     localStorage.setItem('employees', JSON.stringify(employees));
-    
+
     setSuccess(true);
-    
+
     // Show credentials
     setTimeout(() => {
       alert(`Registration Successful!\n\nYour Login ID: ${loginId}\nYour Password: ${password}\n\nPlease save these credentials.`);
@@ -56,9 +56,9 @@ const EmployeeRegister = () => {
         <div className="register-header">
           <div className="register-icon">
             <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-              <circle cx="30" cy="30" r="30" fill="#10B981"/>
-              <path d="M30 15C36.627 15 42 20.373 42 27C42 33.627 36.627 39 30 39C23.373 39 18 33.627 18 27C18 20.373 23.373 15 30 15Z" fill="white"/>
-              <path d="M15 47C15 41 18 36 22 34C22 36 24 38 27 38C30 38 32 36 32 34C36 36 39 41 39 47" stroke="white" strokeWidth="3" strokeLinecap="round"/>
+              <circle cx="30" cy="30" r="30" fill="#10B981" />
+              <path d="M30 15C36.627 15 42 20.373 42 27C42 33.627 36.627 39 30 39C23.373 39 18 33.627 18 27C18 20.373 23.373 15 30 15Z" fill="white" />
+              <path d="M15 47C15 41 18 36 22 34C22 36 24 38 27 38C30 38 32 36 32 34C36 36 39 41 39 47" stroke="white" strokeWidth="3" strokeLinecap="round" />
             </svg>
           </div>
           <h1>Employee Registration</h1>
@@ -73,7 +73,7 @@ const EmployeeRegister = () => {
 
         <form onSubmit={handleSubmit} className="register-form">
           {error && <div className="error-message">{error}</div>}
-          
+
           <div className="form-row">
             <div className="form-group">
               <label className="form-label">Full Name *</label>
@@ -181,7 +181,7 @@ const EmployeeRegister = () => {
 
           <div className="register-footer">
             <p>Already registered? <Link to="/employee/login">Login Here</Link></p>
-            <a href="/" className="back-link">← Back to Home</a>
+            <a href="/" className="back-link">← <span className="btn-text">Back to Home</span></a>
           </div>
         </form>
       </div>

@@ -13,13 +13,13 @@ const Inquiry = () => {
           <div className="section-bg__overlay" />
         </div>
         <div className="container">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div className="page-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <h2 className="section-title" style={{ marginBottom: 8 }}>Inquiry</h2>
-            <button className="btn btn-secondary" onClick={() => navigate('/')}>← Back to Home</button>
+            <button className="btn btn-secondary" onClick={() => navigate('/')}>← <span className="btn-text">Back to Home</span></button>
           </div>
           <div className="inquiry-form-container">
             <h3>Inquiry Form</h3>
-            <form className="inquiry-form" onSubmit={(e)=>{e.preventDefault(); alert('Inquiry submitted. We will contact you soon.')}}>
+            <form className="inquiry-form" onSubmit={(e) => { e.preventDefault(); alert('Inquiry submitted. We will contact you soon.') }}>
               <div className="form-group">
                 <label>Name:</label>
                 <input type="text" className="form-control" placeholder="Enter your name" required />

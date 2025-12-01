@@ -22,7 +22,7 @@ const AdminLogin = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     // Demo login - accept any credentials
     if (formData.username && formData.password) {
       localStorage.setItem('adminLoggedIn', 'true');
@@ -44,9 +44,9 @@ const AdminLogin = () => {
         <div className="login-header">
           <div className="login-icon">
             <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-              <circle cx="30" cy="30" r="30" fill="#667eea"/>
-              <path d="M30 15L40 22.5V37.5L30 45L20 37.5V22.5L30 15Z" fill="white"/>
-              <path d="M22.5 30L27.5 33.75L37.5 24" stroke="#667eea" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+              <circle cx="30" cy="30" r="30" fill="#667eea" />
+              <path d="M30 15L40 22.5V37.5L30 45L20 37.5V22.5L30 15Z" fill="white" />
+              <path d="M22.5 30L27.5 33.75L37.5 24" stroke="#667eea" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </div>
           <h1>Admin Login</h1>
@@ -55,7 +55,7 @@ const AdminLogin = () => {
 
         <form onSubmit={handleSubmit} className="login-form">
           {error && <div className="error-message">{error}</div>}
-          
+
           <div className="form-group">
             <label className="form-label">Username</label>
             <input
@@ -88,7 +88,7 @@ const AdminLogin = () => {
 
           <div className="login-footer">
             <p>Demo Mode: Use any credentials to login</p>
-            <a href="/" className="back-link">← Back to Home</a>
+            <a href="/" className="back-link">← <span className="btn-text">Back to Home</span></a>
           </div>
         </form>
       </div>

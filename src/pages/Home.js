@@ -12,6 +12,7 @@ import Blobs from '../components/Background/Blobs';
 import Reveal from '../components/Section/Reveal';
 import SiteFooter from '../components/Footer/SiteFooter';
 import ServiceCarousel from '../components/ServiceCarousel';
+import { curatedBackgrounds } from '../assets/curatedBackgrounds';
 
 
 const Home = () => {
@@ -24,13 +25,13 @@ const Home = () => {
     stack: []
   });
   const [showLetterDownload, setShowLetterDownload] = useState(false);
+  const [showLetterModal, setShowLetterModal] = useState(false); // New state for modal
   const [letterAuth, setLetterAuth] = useState({ dob: '', email: '' });
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [loginType, setLoginType] = useState('intern');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [theme, setTheme] = useState('dark');
   const [showSearch, setShowSearch] = useState(false);
-  const [infoTab, setInfoTab] = useState('owners');
   const navigate = useNavigate();
 
   const scrollToSection = (id) => {
@@ -97,8 +98,7 @@ const Home = () => {
   };
 
   const handleLetterDownload = () => {
-    setShowLetterDownload(true);
-    scrollToSection('letter-download');
+    setShowLetterModal(true);
   };
 
   const handleLetterAuth = (e) => {
@@ -231,7 +231,7 @@ const Home = () => {
       />
 
       {/* Premium Bootstrap Hero Carousel */}
-      <section id="home" className="hero-section" style={{ minHeight: '80vh', margin: 0, padding: 0 }}>
+      <section id="home" className="hero-section" style={{ margin: 0, padding: 0 }}>
         <BootstrapHero />
       </section>
 
@@ -308,8 +308,12 @@ const Home = () => {
       {/* Products Demo Section - removed as requested */}
 
       {/* Internship Section */}
-      <section id="internship" className="internship-section">
-        <div className="container">
+      <section id="internship" className="internship-section" style={{ position: 'relative', overflow: 'hidden' }}>
+        <div className="section-bg">
+          <div className="section-bg__media" style={{ backgroundImage: `url('${curatedBackgrounds.home.internship}')` }} />
+          <div className="section-bg__overlay" />
+        </div>
+        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <h2 className="section-title">Internship Program</h2>
           <p className="section-subtitle">
             Join our internship program and kickstart your career in IT
@@ -341,16 +345,16 @@ const Home = () => {
       </section>
 
       {/* Let's Grow Together Section - glass cards with subtle background animation */}
-      <section id="grow-together" className="grow-together-section with-blur-bg">
+      <section id="grow-together" className="grow-together-section with-blur-bg" style={{ position: 'relative', overflow: 'hidden' }}>
+        <div className="section-bg">
+          <div className="section-bg__media" style={{ backgroundImage: `url('${curatedBackgrounds.home.grow}')` }} />
+          <div className="section-bg__overlay" />
+        </div>
         <Blobs />
-        <div className="container">
+        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <Reveal><h2 className="section-title">LET'S GROW TOGETHER</h2></Reveal>
           <div className="grow-together-content">
             <div className="grow-together-left" ref={growLeftRef}>
-              <Reveal><div className="grow-box" onClick={() => navigate('/inquiry')}>
-                <h3>1️⃣ Inquiry</h3>
-                <p>Have questions? Get in touch with us</p>
-              </div></Reveal>
               <Reveal delay={0.05}><div className="grow-box" onClick={() => setShowIdeaModal(true)}>
                 <h3>🧩 Share Your Project Idea</h3>
                 <p>Tell us what you want to build</p>
@@ -360,7 +364,7 @@ const Home = () => {
                 <p>Join our team and grow with us</p>
               </div></Reveal>
             </div>
-            <div className="grow-together-right" style={{ position: 'relative' }}>
+            <div className="grow-together-right hide-on-mobile" style={{ position: 'relative' }}>
               <aside style={{ position: 'sticky', top: 24, alignSelf: 'start', height: growH }} aria-label="Grow gallery">
                 <div id="growCarousel" className="carousel slide" data-bs-ride="carousel" style={{ height: '100%', borderRadius: 16, overflow: 'hidden', boxShadow: '0 10px 24px var(--shadow)' }}>
                   <div className="carousel-indicators">
@@ -398,28 +402,12 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Team & Letters - Combined Tabs */}
-      <section id="team-letters" className="owners-section with-blur-bg">
+      {/* Team Section */}
+      <section id="team" className="owners-section with-blur-bg">
         <div className="container">
-          <h2 className="section-title">Team & Letters</h2>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: 12, marginBottom: 16 }}>
-            <button
-              className="btn btn-secondary"
-              onClick={() => setInfoTab('owners')}
-              aria-controls="owners-panel"
-            >
-              Our Owners
-            </button>
-            <button
-              className="btn btn-secondary"
-              onClick={() => setInfoTab('letters')}
-              aria-controls="letters-panel"
-            >
-              Offer/Completion Letter
-            </button>
-          </div>
+          <h2 className="section-title">Our Team</h2>
           {/* Owners Panel */}
-          <div id="owners-panel" style={{ display: infoTab === 'letters' ? 'none' : 'block' }}>
+          <div id="owners-panel">
             <div id="owners" />
             <div className="owners-grid">
               {owners.map((o, idx) => (
@@ -431,37 +419,6 @@ const Home = () => {
                   <p className="owner-title">{o.title}</p>
                 </div>
               ))}
-            </div>
-          </div>
-          {/* Letters Panel */}
-          <div id="letters-panel" style={{ display: infoTab === 'letters' ? 'block' : 'none' }}>
-            <div id="letter-download" />
-            <div className="letter-download-content" style={{ maxWidth: 600, margin: '24px auto 0' }}>
-              <form onSubmit={handleLetterAuth} className="letter-auth-form">
-                <h3>Authentication Required</h3>
-                <div className="form-group">
-                  <label>Date of Birth:</label>
-                  <input
-                    type="date"
-                    className="form-control"
-                    value={letterAuth.dob}
-                    onChange={(e) => setLetterAuth({ ...letterAuth, dob: e.target.value })}
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label>Registered Email ID:</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    value={letterAuth.email}
-                    onChange={(e) => setLetterAuth({ ...letterAuth, email: e.target.value })}
-                    placeholder="Enter your registered email"
-                    required
-                  />
-                </div>
-                <button type="submit" className="btn btn-primary">Verify & Download</button>
-              </form>
             </div>
           </div>
         </div>
@@ -537,7 +494,7 @@ const Home = () => {
                     />
                     {contactErrors.subject && <small style={{ color: '#ef4444' }}>{contactErrors.subject}</small>}
                   </div>
-                  <div className="form-group form-full-width">
+                  <div className="form-group form-full-width message-group">
                     <label>Message</label>
                     <textarea
                       className="form-control"
@@ -629,6 +586,49 @@ const Home = () => {
                 </div>
               </div>
               <button type="submit" className="btn btn-primary">✨ Submit Your Project Idea</button>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Letter Download Modal */}
+      {showLetterModal && (
+        <div className="modal-overlay" onClick={() => setShowLetterModal(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setShowLetterModal(false)}>×</button>
+            <h2>Download Letter</h2>
+            <p style={{ marginBottom: 20, color: 'var(--text-secondary)' }}>
+              Please verify your details to download your Offer or Completion Letter.
+            </p>
+            <form onSubmit={(e) => {
+              e.preventDefault();
+              handleLetterAuth(e);
+              setShowLetterModal(false);
+            }} className="letter-auth-form">
+              <div className="form-group">
+                <label>Date of Birth:</label>
+                <input
+                  type="date"
+                  className="form-control"
+                  value={letterAuth.dob}
+                  onChange={(e) => setLetterAuth({ ...letterAuth, dob: e.target.value })}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label>Registered Email ID:</label>
+                <input
+                  type="email"
+                  className="form-control"
+                  value={letterAuth.email}
+                  onChange={(e) => setLetterAuth({ ...letterAuth, email: e.target.value })}
+                  placeholder="Enter your registered email"
+                  required
+                />
+              </div>
+              <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: 10 }}>
+                Verify & Download
+              </button>
             </form>
           </div>
         </div>

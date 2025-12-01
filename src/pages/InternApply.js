@@ -29,7 +29,7 @@ const InternApply = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     // Demo application - store application
     const applications = JSON.parse(localStorage.getItem('internApplications') || '[]');
     applications.push({
@@ -39,9 +39,9 @@ const InternApply = () => {
       appliedDate: new Date().toISOString()
     });
     localStorage.setItem('internApplications', JSON.stringify(applications));
-    
+
     setSuccess(true);
-    
+
     setTimeout(() => {
       alert('Application submitted successfully! Admin will review your application and you will receive credentials upon approval.');
       navigate('/');
@@ -54,9 +54,9 @@ const InternApply = () => {
         <div className="register-header">
           <div className="register-icon">
             <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-              <circle cx="30" cy="30" r="30" fill="#F59E0B"/>
-              <path d="M20 25L30 15L40 25V35C40 40 36 44 30 44C24 44 20 40 20 35V25Z" fill="white"/>
-              <path d="M25 30L28 33L35 26" stroke="#F59E0B" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+              <circle cx="30" cy="30" r="30" fill="#F59E0B" />
+              <path d="M20 25L30 15L40 25V35C40 40 36 44 30 44C24 44 20 40 20 35V25Z" fill="white" />
+              <path d="M25 30L28 33L35 26" stroke="#F59E0B" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </div>
           <h1>Internship Application</h1>
@@ -71,7 +71,7 @@ const InternApply = () => {
 
         <form onSubmit={handleSubmit} className="register-form">
           {error && <div className="error-message">{error}</div>}
-          
+
           <div className="form-row">
             <div className="form-group">
               <label className="form-label">Full Name *</label>
@@ -226,7 +226,7 @@ const InternApply = () => {
 
           <div className="register-footer">
             <p>Already applied? <Link to="/intern/login">Login Here</Link></p>
-            <a href="/" className="back-link">← Back to Home</a>
+            <a href="/" className="back-link">← <span className="btn-text">Back to Home</span></a>
           </div>
         </form>
       </div>

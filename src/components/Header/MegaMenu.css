@@ -98,7 +98,8 @@
     display: flex;
     justify-content: center;
     gap: 60px;
-    z-index: 1200; /* ensure panel appears above other content */
+    z-index: 1200;
+    /* ensure panel appears above other content */
 }
 
 .mm-col {
@@ -226,77 +227,14 @@
 .mm-search-close {
     background: none;
     border: none;
-    color: var(--text-muted);
-    cursor: pointer;
-    padding: 4px;
-}
-
-.mm-search-close:hover {
-    color: var(--text-primary);
-}
-
-/* Mobile */
-.mm-mobile-overlay {
-    position: fixed;
-    /* full viewport overlay for a standard mobile menu experience */
-    inset: 0;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 2147483646 !important;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    /* prevent the overlay itself from scrolling; scroll inside the menu content only */
-    overflow: hidden;
-    display: block !important;
-    visibility: visible !important;
-}
-
-.mm-mobile-menu {
-    /* make menu fixed so it cannot be covered by other positioned elements */
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    background: var(--bg-card);
-    display: flex;
-    flex-direction: column;
-    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.2);
-    /* ensure menu container doesn't create an extra page scrollbar */
-    overflow: hidden;
-    visibility: visible !important;
-    z-index: 2147483647 !important;
-}
-
-.mm-mobile-header {
-    height: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: center; /* center title by default */
-    padding: 0 24px;
-    border-bottom: 1px solid var(--border);
-    position: relative;
-}
-
-.mm-mobile-title {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin: 0 auto;
-    text-align: center;
-}
-
-.mm-mobile-close {
-    background: none;
-    border: none;
     color: var(--text-primary);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 8px;
-    margin-right: 0; /* remove negative offset so icon aligns correctly */
+    margin-right: 0;
+    /* remove negative offset so icon aligns correctly */
     /* position the close icon at the right edge of the header */
     position: absolute;
     right: 16px;
@@ -367,6 +305,7 @@
     width: 0;
     height: 0;
 }
+
 .mm-mobile-menu::-webkit-scrollbar {
     width: 0;
     height: 0;

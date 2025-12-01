@@ -5,25 +5,33 @@ const slides = [
   {
     title: 'Welcome to Growmore IT',
     subtitle: 'A premium technology experience',
-    image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2000&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2000&auto=format&fit=crop',
+    mobileImage: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=800&auto=format&fit=crop' // Optimized for mobile
   },
   {
     title: 'Curated Solutions. Exquisite Delivery.',
     subtitle: 'Crafted with passion and precision',
-    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2000&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2000&auto=format&fit=crop',
+    mobileImage: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop'
   },
   {
     title: 'Modern Ambience. Timeless Excellence.',
     subtitle: 'Build with a partner you can trust',
-    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2000&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2000&auto=format&fit=crop',
+    mobileImage: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop'
   }
 ];
 
 const BootstrapHero = () => {
+  // Ensure slides exist and are not empty
+  const activeSlides = slides.filter(s => s.image);
+
+  if (!activeSlides.length) return null;
+
   return (
-    <div id="gmHero" className="carousel slide" data-bs-ride="carousel" style={{ width: '100%', height: '100%' }}>
+    <div id="gmHero" className="carousel slide" data-bs-ride="carousel" data-bs-interval="5000" style={{ width: '100%', height: '100%' }}>
       <div className="carousel-indicators">
-        {slides.map((_, i) => (
+        {activeSlides.map((_, i) => (
           <button
             key={i}
             type="button"
@@ -36,11 +44,17 @@ const BootstrapHero = () => {
         ))}
       </div>
       <div className="carousel-inner" style={{ height: '100%' }}>
-        {slides.map((s, i) => (
+        {activeSlides.map((s, i) => (
           <div key={i} className={`carousel-item ${i === 0 ? 'active' : ''}`} style={{ height: '100%' }}>
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.1) 100%)', zIndex: 1 }} />
-            <img src={s.image} className="d-block w-100" alt={s.title} style={{ objectFit: 'cover', height: '100%' }} />
-            <div className="carousel-caption" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.8)', zIndex: 2, bottom: '10%', left: '5%', right: '5%' }}>
+
+            {/* Mobile Image Support */}
+            <picture>
+              <source media="(max-width: 768px)" srcSet={s.mobileImage || s.image} />
+              <img src={s.image} className="d-block w-100" alt={s.title} style={{ objectFit: 'cover', height: '100%' }} />
+            </picture>
+
+            <div className="carousel-caption" style={{ color: '#ffffff', textShadow: '0 2px 10px rgba(0,0,0,0.8)', zIndex: 2, bottom: '10%', left: '5%', right: '5%' }}>
               <h1 style={{ fontFamily: '\'Playfair Display\', serif', fontSize: 'clamp(2rem, 5vw, 4rem)', marginBottom: '1rem' }}>{s.title}</h1>
               <div style={{ fontFamily: '\'Poppins\', sans-serif', fontWeight: 500, fontSize: 'clamp(1rem, 2vw, 1.5rem)', marginBottom: '2rem', minHeight: '1.5em' }}>
                 <TypeAnimation
