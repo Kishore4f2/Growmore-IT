@@ -164,7 +164,21 @@ const Home = () => {
     { name: 'Owner Two', title: 'Owner', img: 'https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=800&auto=format&fit=crop' }
   ];
   const growLeftRef = React.useRef(null);
+  const growCarouselRef = React.useRef(null);
   const [growH, setGrowH] = React.useState(360);
+
+  React.useEffect(() => {
+    if (growCarouselRef.current && window.bootstrap) {
+      const carousel = new window.bootstrap.Carousel(growCarouselRef.current, {
+        interval: 3000,
+        ride: 'carousel',
+        touch: true,
+        pause: false
+      });
+      return () => carousel.dispose();
+    }
+  }, []);
+
   React.useEffect(() => {
     const calc = () => {
       if (growLeftRef.current) {
@@ -385,7 +399,7 @@ const Home = () => {
             </div>
             <div className="grow-together-right hide-on-mobile" style={{ position: 'relative' }}>
               <aside style={{ position: 'sticky', top: 24, alignSelf: 'start', height: growH }} aria-label="Grow gallery">
-                <div id="growCarousel" className="carousel slide" data-bs-ride="carousel" style={{ height: '100%', borderRadius: 16, overflow: 'hidden', boxShadow: '0 10px 24px var(--shadow)' }}>
+                <div ref={growCarouselRef} id="growCarousel" className="carousel slide" style={{ height: '100%', borderRadius: 16, overflow: 'hidden', boxShadow: '0 10px 24px var(--shadow)' }}>
                   <div className="carousel-indicators">
                     {growGallery.map((_, i) => (
                       <button

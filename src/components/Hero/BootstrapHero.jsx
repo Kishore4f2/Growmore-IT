@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { TypeAnimation } from 'react-type-animation';
 
 const slides = [
@@ -23,13 +23,27 @@ const slides = [
 ];
 
 const BootstrapHero = () => {
+  const carouselRef = useRef(null);
+
+  useEffect(() => {
+    if (carouselRef.current && window.bootstrap) {
+      const carousel = new window.bootstrap.Carousel(carouselRef.current, {
+        interval: 3000,
+        ride: 'carousel',
+        touch: true,
+        pause: false
+      });
+      return () => carousel.dispose();
+    }
+  }, []);
+
   // Ensure slides exist and are not empty
   const activeSlides = slides.filter(s => s.image);
 
   if (!activeSlides.length) return null;
 
   return (
-    <div id="gmHero" className="carousel slide" data-bs-ride="carousel" data-bs-interval="5000" style={{ width: '100%', height: '100%' }}>
+    <div ref={carouselRef} id="gmHero" className="carousel slide" style={{ width: '100%', height: '100%' }}>
       <div className="carousel-indicators">
         {activeSlides.map((_, i) => (
           <button

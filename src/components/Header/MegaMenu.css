@@ -65,11 +65,18 @@
     transition: all 0.2s ease;
 }
 
-.mm-link:hover,
 .mm-item.active .mm-link {
     color: var(--primary);
     background: rgba(var(--primary-rgb), 0.08);
     opacity: 1;
+}
+
+@media (hover: hover) {
+    .mm-link:hover {
+        color: var(--primary);
+        background: rgba(var(--primary-rgb), 0.08);
+        opacity: 1;
+    }
 }
 
 .mm-chevron {
@@ -134,8 +141,10 @@
     transition: color 0.2s ease;
 }
 
-.mm-panel-link:hover {
-    color: var(--primary);
+@media (hover: hover) {
+    .mm-panel-link:hover {
+        color: var(--primary);
+    }
 }
 
 /* Actions */
@@ -159,177 +168,12 @@
     transition: all 0.2s ease;
 }
 
-.mm-action:hover {
-    background: var(--bg-hover);
-    border-color: var(--primary);
-    color: var(--primary);
-}
-
-/* MegaMenu.css */
-.mm-header {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    background: var(--bg-card);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-    transition: background 0.3s ease, border-color 0.3s ease;
-}
-
-.mm-bar {
-    max-width: 1400px;
-    margin: 0 auto;
-    height: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 24px;
-    position: relative;
-}
-
-.mm-logo {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    display: flex;
-    align-items: center;
-}
-
-.mm-logo img {
-    height: 40px;
-    width: auto;
-    object-fit: contain;
-}
-
-/* Desktop Nav */
-.mm-nav-desktop {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    height: 100%;
-}
-
-.mm-item {
-    height: 100%;
-    display: flex;
-    align-items: center;
-}
-
-.mm-link {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: var(--text-secondary);
-    padding: 8px 16px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    transition: all 0.2s ease;
-}
-
-.mm-link:hover,
-.mm-item.active .mm-link {
-    color: var(--primary);
-    background: rgba(var(--primary-rgb), 0.08);
-    opacity: 1;
-}
-
-.mm-chevron {
-    transition: transform 0.2s ease;
-    opacity: 0.6;
-}
-
-.mm-chevron.rotate {
-    transform: rotate(180deg);
-}
-
-.mm-chevron.rotate-90 {
-    transform: rotate(90deg);
-}
-
-/* Mega Panel */
-.mm-panel {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background: var(--bg-card);
-    border-bottom: 1px solid var(--border);
-    padding: 32px 0;
-    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    justify-content: center;
-    gap: 60px;
-    z-index: 1200;
-}
-
-.mm-col {
-    min-width: 200px;
-}
-
-.mm-col h4 {
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--text-muted);
-    margin-bottom: 16px;
-    font-weight: 600;
-}
-
-.mm-col ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.mm-panel-link {
-    background: none;
-    border: none;
-    cursor: pointer;
-    text-align: left;
-    font-size: 1rem;
-    color: var(--text-primary);
-    padding: 0;
-    transition: color 0.2s ease;
-}
-
-.mm-panel-link:hover {
-    color: var(--primary);
-}
-
-/* Actions */
-.mm-actions {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.mm-action {
-    background: none;
-    border: 1px solid var(--border);
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-primary);
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.mm-action:hover {
-    background: var(--bg-hover);
-    border-color: var(--primary);
-    color: var(--primary);
+@media (hover: hover) {
+    .mm-action:hover {
+        background: var(--bg-hover);
+        border-color: var(--primary);
+        color: var(--primary);
+    }
 }
 
 .mm-burger {
@@ -377,8 +221,10 @@
     transition: color 0.2s ease;
 }
 
-.mm-mobile-group-btn:hover {
-    color: var(--primary);
+@media (hover: hover) {
+    .mm-mobile-group-btn:hover {
+        color: var(--primary);
+    }
 }
 
 .mm-mobile-sub {
@@ -417,8 +263,10 @@
     transition: color 0.2s ease;
 }
 
-.mm-mobile-link:hover {
-    color: var(--primary);
+@media (hover: hover) {
+    .mm-mobile-link:hover {
+        color: var(--primary);
+    }
 }
 
 @media (max-width: 968px) {
@@ -448,7 +296,6 @@
 }
 
 /* Hover / visibility fixes */
-.mm-link:hover,
 .mm-item.active .mm-link {
     opacity: 1 !important;
     color: var(--primary) !important;
@@ -456,9 +303,18 @@
     text-shadow: none;
 }
 
-.mm-action:hover,
-.mm-burger:hover {
-    transform: none !important;
+@media (hover: hover) {
+    .mm-link:hover {
+        opacity: 1 !important;
+        color: var(--primary) !important;
+        background: rgba(var(--primary-rgb), 0.08) !important;
+        text-shadow: none;
+    }
+
+    .mm-action:hover,
+    .mm-burger:hover {
+        transform: none !important;
+    }
 }
 
 /* Search Bar */
