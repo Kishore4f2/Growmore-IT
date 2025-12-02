@@ -158,20 +158,22 @@ const MegaMenu = ({ onLogoClick, onToggleSearch, onToggleTheme, onLogin, theme, 
                 </nav>
 
                 <div className="mm-actions">
-                    <button className="mm-action" onClick={onToggleTheme} title="Toggle theme">
-                        {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
-                    </button>
                     {!showSearch && (
-                        <button className="mm-action" onClick={() => { setShowSearch(true); onToggleSearch && onToggleSearch(); }} title="Search">
-                            <Search size={18} />
-                        </button>
+                        <>
+                            <button className="mm-action" onClick={onToggleTheme} title="Toggle theme">
+                                {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+                            </button>
+                            <button className="mm-action" onClick={() => { setShowSearch(true); onToggleSearch && onToggleSearch(); }} title="Search">
+                                <Search size={18} />
+                            </button>
+                            <button className="mm-action" onClick={() => onLogin && onLogin()} title="Login">
+                                <User size={18} />
+                            </button>
+                            <button className="mm-burger" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Menu">
+                                {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+                            </button>
+                        </>
                     )}
-                    <button className="mm-action" onClick={() => onLogin && onLogin()} title="Login">
-                        <User size={18} />
-                    </button>
-                    <button className="mm-burger" onClick={() => setMobileOpen(true)} aria-label="Menu">
-                        <Menu size={24} />
-                    </button>
                 </div>
 
                 {/* Desktop Search Bar */}
@@ -200,69 +202,53 @@ const MegaMenu = ({ onLogoClick, onToggleSearch, onToggleTheme, onLogin, theme, 
                 </AnimatePresence>
             </div>
 
-            {/* Mobile Menu Overlay */}
+            {/* Mobile Menu Dropdown */}
             <AnimatePresence>
                 {mobileOpen && (
                     <motion.div
-                        className="mm-mobile-overlay"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        onClick={() => setMobileOpen(false)}
+                        className="mm-mobile-dropdown"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
                     >
-                        <motion.div
-                            className="mm-mobile-menu"
-                            initial={{ x: '100%' }}
-                            animate={{ x: 0 }}
-                            exit={{ x: '100%' }}
-                            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                            onClick={e => e.stopPropagation()}
-                        >
-                            <div className="mm-mobile-header">
-                                <span className="mm-mobile-title">Menu</span>
-                                <button className="mm-mobile-close" onClick={() => setMobileOpen(false)}>
-                                    <X size={24} />
-                                </button>
-                            </div>
+                        <div className="mm-mobile-content">
+                            {NAV_ITEMS.map(item => (
+                                <div key={item.id} className="mm-mobile-group">
+                                    <button
+                                        className="mm-mobile-group-btn"
+                                        onClick={() => toggleMobileSection(item.id)}
+                                    >
+                                        {item.label}
+                                        <ChevronRight size={16} className={`mm-chevron ${mobileExpanded[item.id] ? 'rotate-90' : ''}`} />
+                                    </button>
 
-                            <div className="mm-mobile-content">
-                                {NAV_ITEMS.map(item => (
-                                    <div key={item.id} className="mm-mobile-group">
-                                        <button
-                                            className="mm-mobile-group-btn"
-                                            onClick={() => toggleMobileSection(item.id)}
-                                        >
-                                            {item.label}
-                                            <ChevronRight size={16} className={`mm-chevron ${mobileExpanded[item.id] ? 'rotate-90' : ''}`} />
-                                        </button>
-
-                                        <AnimatePresence>
-                                            {mobileExpanded[item.id] && (
-                                                <motion.div
-                                                    layout
-                                                    initial={{ opacity: 0 }}
-                                                    animate={{ opacity: 1 }}
-                                                    exit={{ opacity: 0 }}
-                                                    transition={{ duration: 0.18 }}
-                                                    className="mm-mobile-sub"
-                                                >
-                                                    {item.columns.map((col, idx) => (
-                                                        <div key={idx} className="mm-mobile-col">
-                                                            <h5>{col.heading}</h5>
-                                                            {col.links.map((l, i) => (
-                                                                <button key={i} className="mm-mobile-link" onClick={() => onLink(l.to)}>
-                                                                    {l.label}
-                                                                </button>
-                                                            ))}
-                                                        </div>
-                                                    ))}
-                                                </motion.div>
-                                            )}
-                                        </AnimatePresence>
-                                    </div>
-                                ))}
-                            </div>
-                        </motion.div>
+                                    <AnimatePresence>
+                                        {mobileExpanded[item.id] && (
+                                            <motion.div
+                                                layout
+                                                initial={{ opacity: 0, height: 0 }}
+                                                animate={{ opacity: 1, height: 'auto' }}
+                                                exit={{ opacity: 0, height: 0 }}
+                                                transition={{ duration: 0.2 }}
+                                                className="mm-mobile-sub"
+                                            >
+                                                {item.columns.map((col, idx) => (
+                                                    <div key={idx} className="mm-mobile-col">
+                                                        <h5>{col.heading}</h5>
+                                                        {col.links.map((l, i) => (
+                                                            <button key={i} className="mm-mobile-link" onClick={() => onLink(l.to)}>
+                                                                {l.label}
+                                                            </button>
+                                                        ))}
+                                                    </div>
+                                                ))}
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+                                </div>
+                            ))}
+                        </div>
                     </motion.div>
                 )}
             </AnimatePresence>
