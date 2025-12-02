@@ -303,14 +303,37 @@
 /* Hero Section */
 .hero-section {
   position: relative;
-  min-height: 50vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  min-height: auto;
+  /* Let content dictate height */
+  height: auto;
+  display: block;
   padding: 0;
   overflow: hidden;
   margin: 0;
   border-radius: 0;
+}
+
+.hero-section .carousel {
+  height: auto !important;
+  min-height: auto;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  margin-bottom: 0 !important;
+}
+
+.hero-section .carousel-item {
+  height: auto !important;
+  min-height: auto !important;
+}
+
+.hero-section .carousel-inner {
+  height: auto !important;
+}
+
+.hero-section img {
+  height: auto !important;
+  min-height: auto !important;
+  display: block !important;
 }
 
 @media (max-width: 768px) {
@@ -734,7 +757,7 @@ section {
 .about-section {
   background: var(--bg-primary);
   border-radius: 24px;
-  margin: 16px 0;
+  margin: -40px 0 16px 0;
   padding: 32px 8px;
   box-shadow: 0 10px 40px var(--shadow);
 }
@@ -1554,7 +1577,8 @@ textarea.form-control {
 
   .inquiry-form-container,
   .job-form-container {
-    margin-top: 20px;
+    margin-top: 10px;
+    padding: 12px;
   }
 }
 
@@ -1751,8 +1775,8 @@ textarea.form-control {
 
 @media (max-width: 480px) {
   .contact-section {
-    margin: 20px 12px;
-    padding: 20px;
+    margin: 10px 0;
+    padding: 4px;
   }
 
   .contact-item {
