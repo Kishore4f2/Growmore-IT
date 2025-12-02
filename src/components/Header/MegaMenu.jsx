@@ -63,7 +63,7 @@ const NAV_ITEMS = [
     }
 ];
 
-const MegaMenu = ({ onLogoClick, onToggleSearch, onToggleTheme, onLogin, theme, onNavigate }) => {
+const MegaMenu = ({ onLogoClick, onToggleSearch, onToggleTheme, onLogin, theme, onNavigate, onApplyJob }) => {
     const [openPanel, setOpenPanel] = useState(null);
     const [mobileOpen, setMobileOpen] = useState(false);
     const [showSearch, setShowSearch] = useState(false);
@@ -94,6 +94,10 @@ const MegaMenu = ({ onLogoClick, onToggleSearch, onToggleTheme, onLogin, theme, 
     const onLink = (to) => {
         setOpenPanel(null);
         setMobileOpen(false);
+        if (to === '/apply-job' && onApplyJob) {
+            onApplyJob();
+            return;
+        }
         if (to.startsWith('#')) {
             const id = to.replace('#', '');
             const el = document.getElementById(id);
@@ -114,76 +118,72 @@ const MegaMenu = ({ onLogoClick, onToggleSearch, onToggleTheme, onLogin, theme, 
                     <img src="/Growmore1.jpg" alt="Growmore IT" />
                 </button>
 
-                {/* Desktop Nav */}
-                <nav className="mm-nav-desktop">
-                    {NAV_ITEMS.map(item => (
-                        <div
-                            key={item.id}
-                            className={`mm-item ${openPanel === item.id ? 'active' : ''}`}
-                            onMouseEnter={() => handleItemEnter(item.id)}
-                        >
-                            <button
-                                className="mm-link"
-                                onClick={() => setOpenPanel(openPanel === item.id ? null : item.id)}
+                {/* Desktop Nav - Hide when search is open */}
+                {!showSearch && (
+                    <nav className="mm-nav-desktop">
+                        {NAV_ITEMS.map(item => (
+                            <div
+                                key={item.id}
+                                className={`mm-item ${openPanel === item.id ? 'active' : ''}`}
+                                onMouseEnter={() => handleItemEnter(item.id)}
                             >
-                                {item.label} <ChevronDown size={14} className={`mm-chevron ${openPanel === item.id ? 'rotate' : ''}`} />
-                            </button>
+                                <button
+                                    className="mm-link"
+                                    onClick={() => setOpenPanel(openPanel === item.id ? null : item.id)}
+                                >
+                                    {item.label} <ChevronDown size={14} className={`mm-chevron ${openPanel === item.id ? 'rotate' : ''}`} />
+                                </button>
 
-                            <AnimatePresence>
-                                {openPanel === item.id && (
-                                    <motion.div
-                                        className="mm-panel"
-                                        initial={{ opacity: 0, y: 10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={{ opacity: 0, y: 10 }}
-                                        transition={{ duration: 0.2 }}
-                                    >
-                                        {item.columns.map((col, idx) => (
-                                            <div className="mm-col" key={idx}>
-                                                <h4>{col.heading}</h4>
-                                                <ul>
-                                                    {col.links.map((l, i) => (
-                                                        <li key={i}>
-                                                            <button className="mm-panel-link" onClick={() => onLink(l.to)}>{l.label}</button>
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </div>
-                                        ))}
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
-                        </div>
-                    ))}
-                </nav>
+                                <AnimatePresence>
+                                    {openPanel === item.id && (
+                                        <motion.div
+                                            className="mm-panel"
+                                            initial={{ opacity: 0, y: 10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            exit={{ opacity: 0, y: 10 }}
+                                            transition={{ duration: 0.2 }}
+                                        >
+                                            {item.columns.map((col, idx) => (
+                                                <div className="mm-col" key={idx}>
+                                                    <h4>{col.heading}</h4>
+                                                    <ul>
+                                                        {col.links.map((l, i) => (
+                                                            <li key={i}>
+                                                                <button className="mm-panel-link" onClick={() => onLink(l.to)}>{l.label}</button>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                            ))}
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </div>
+                        ))}
+                    </nav>
+                )}
 
-                <div className="mm-actions">
-                    {!showSearch && (
-                        <>
-                            <button className="mm-action" onClick={onToggleTheme} title="Toggle theme">
-                                {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
-                            </button>
-                            <button className="mm-action" onClick={() => { setShowSearch(true); onToggleSearch && onToggleSearch(); }} title="Search">
-                                <Search size={18} />
-                            </button>
-                            <button className="mm-action" onClick={() => onLogin && onLogin()} title="Login">
-                                <User size={18} />
-                            </button>
-                            <button className="mm-burger" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Menu">
-                                {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-                            </button>
-                        </>
-                    )}
-                </div>
+                {!showSearch && (
+                    <div className="mm-actions">
+                        <button className="mm-action" onClick={onToggleTheme} title="Toggle theme">
+                            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+                        </button>
+                        <button className="mm-action" onClick={() => { setShowSearch(true); onToggleSearch && onToggleSearch(); }} title="Search">
+                            <Search size={18} />
+                        </button>
+                        <button className="mm-action" onClick={() => onLogin && onLogin()} title="Login">
+                            <User size={18} />
+                        </button>
+                        <button className="mm-burger" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Menu">
+                            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+                        </button>
+                    </div>
+                )}
 
-                {/* Desktop Search Bar */}
+                {/* Search Bar - In Flow */}
                 <AnimatePresence>
                     {showSearch && (
                         <motion.form
-                            initial={{ opacity: 0, width: 0, x: 20 }}
-                            animate={{ opacity: 1, width: 300, x: 0 }}
-                            exit={{ opacity: 0, width: 0, x: 20 }}
-                            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                             onSubmit={(e) => { e.preventDefault(); setShowSearch(false); onNavigate && onNavigate('/insights'); }}
                             className="mm-search-bar"
                         >
@@ -195,7 +195,7 @@ const MegaMenu = ({ onLogoClick, onToggleSearch, onToggleTheme, onLogin, theme, 
                                 autoFocus
                             />
                             <button type="button" onClick={() => setShowSearch(false)} className="mm-search-close">
-                                <X size={14} />
+                                <X size={18} />
                             </button>
                         </motion.form>
                     )}

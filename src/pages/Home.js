@@ -13,22 +13,40 @@ import Reveal from '../components/Section/Reveal';
 import SiteFooter from '../components/Footer/SiteFooter';
 import ServiceCarousel from '../components/ServiceCarousel';
 import { curatedBackgrounds } from '../assets/curatedBackgrounds';
+import PaidInternshipModal from '../components/Internship/PaidInternshipModal';
+import UnpaidInternshipModal from '../components/Internship/UnpaidInternshipModal';
+import AdminLoginModal from '../components/Modals/AdminLoginModal';
+import EmployeeLoginModal from '../components/Modals/EmployeeLoginModal';
+import InternLoginModal from '../components/Modals/InternLoginModal';
+import EmployeeRegisterModal from '../components/Modals/EmployeeRegisterModal';
+import InternApplyModal from '../components/Modals/InternApplyModal';
+import ApplyJobModal from '../components/Modals/ApplyJobModal';
+import LoginSelectionModal from '../components/Modals/LoginSelectionModal';
 
 
 const Home = () => {
   const [activeService, setActiveService] = useState(null);
   const [showInternshipOptions, setShowInternshipOptions] = useState(false);
+  const [showPaidModal, setShowPaidModal] = useState(false);
+  const [showUnpaidModal, setShowUnpaidModal] = useState(false);
+  const [showAdminLogin, setShowAdminLogin] = useState(false);
+  const [showEmployeeLogin, setShowEmployeeLogin] = useState(false);
+  const [showInternLogin, setShowInternLogin] = useState(false);
+  const [showEmployeeRegister, setShowEmployeeRegister] = useState(false);
+  const [showInternApply, setShowInternApply] = useState(false);
+  const [showApplyJob, setShowApplyJob] = useState(false);
+  const [showLoginSelection, setShowLoginSelection] = useState(false);
   const [showIdeaModal, setShowIdeaModal] = useState(false);
   const [ideaForm, setIdeaForm] = useState({
     idea: '',
     benefit: '',
-    stack: []
+    stack: [],
+    otherTech: ''
   });
   const [showLetterDownload, setShowLetterDownload] = useState(false);
   const [showLetterModal, setShowLetterModal] = useState(false); // New state for modal
   const [letterAuth, setLetterAuth] = useState({ dob: '', email: '' });
-  const [showLoginModal, setShowLoginModal] = useState(false);
-  const [loginType, setLoginType] = useState('intern');
+  // Removed showLoginModal as we have specific modals now
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [theme, setTheme] = useState('dark');
   const [showSearch, setShowSearch] = useState(false);
@@ -86,11 +104,11 @@ const Home = () => {
   };
 
   const handlePaidInternship = () => {
-    navigate('/internship/paid');
+    setShowPaidModal(true);
   };
 
   const handleUnpaidInternship = () => {
-    navigate('/internship/unpaid');
+    setShowUnpaidModal(true);
   };
 
   const handleGetStarted = () => {
@@ -222,10 +240,11 @@ const Home = () => {
     <div className={`home-container ${theme}`}>
       {/* Premium Header */}
       <MegaMenu
-        onLogoClick={() => navigate('/admin/login')}
+        onLogoClick={() => setShowAdminLogin(true)}
         onToggleSearch={undefined}
         onToggleTheme={() => setTheme(prev => prev === 'dark' ? 'light' : 'dark')}
-        onLogin={() => setShowLoginModal(true)}
+        onLogin={() => setShowLoginSelection(true)}
+        onApplyJob={() => setShowApplyJob(true)}
         theme={theme}
         onNavigate={(to) => navigate(to)}
       />
@@ -359,7 +378,7 @@ const Home = () => {
                 <h3>🧩 Share Your Project Idea</h3>
                 <p>Tell us what you want to build</p>
               </div></Reveal>
-              <Reveal delay={0.1}><div className="grow-box" onClick={() => navigate('/apply-job')}>
+              <Reveal delay={0.1}><div className="grow-box" onClick={() => setShowApplyJob(true)}>
                 <h3>2️⃣ Apply for Job</h3>
                 <p>Join our team and grow with us</p>
               </div></Reveal>
@@ -541,7 +560,8 @@ const Home = () => {
                 e.preventDefault();
                 alert('✨ Project idea submitted!');
                 setShowIdeaModal(false);
-                setIdeaForm({ idea: '', benefit: '', stack: [] });
+                setShowIdeaModal(false);
+                setIdeaForm({ idea: '', benefit: '', stack: [], otherTech: '' });
               }}
             >
               <div className="form-group">
@@ -584,6 +604,16 @@ const Home = () => {
                     </label>
                   ))}
                 </div>
+              </div>
+              <div className="form-group">
+                <label>Other Technologies (Optional):</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="e.g. Docker, AWS, Firebase"
+                  value={ideaForm.otherTech}
+                  onChange={(e) => setIdeaForm({ ...ideaForm, otherTech: e.target.value })}
+                />
               </div>
               <button type="submit" className="btn btn-primary">✨ Submit Your Project Idea</button>
             </form>
@@ -634,50 +664,45 @@ const Home = () => {
         </div>
       )}
 
-      {/* Intern/Employee Login Modal */}
-      {showLoginModal && (
-        <div className="modal-overlay" onClick={() => setShowLoginModal(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={() => setShowLoginModal(false)}>×</button>
-            <h2>Login</h2>
-            <div className="login-type-selector">
-              <button
-                className={loginType === 'intern' ? 'active' : ''}
-                onClick={() => setLoginType('intern')}
-              >
-                Intern
-              </button>
-              <button
-                className={loginType === 'employee' ? 'active' : ''}
-                onClick={() => setLoginType('employee')}
-              >
-                Employee
-              </button>
-            </div>
-            <form className="login-form" onSubmit={(e) => {
-              e.preventDefault();
-              setShowLoginModal(false);
-              if (loginType === 'intern') {
-                navigate('/intern/login');
-              } else {
-                navigate('/employee/login');
-              }
-            }}>
-              <div className="form-group">
-                <label>Login ID:</label>
-                <input type="text" className="form-control" placeholder="Enter your login ID" required />
-              </div>
-              <div className="form-group">
-                <label>Password:</label>
-                <input type="password" className="form-control" placeholder="Enter your password" required />
-              </div>
-              <button type="submit" className="btn btn-primary">
-                Login
-              </button>
-            </form>
-          </div>
-        </div>
+      {/* Modals */}
+      {showLoginSelection && (
+        <LoginSelectionModal
+          onClose={() => setShowLoginSelection(false)}
+          onAdminClick={() => { setShowLoginSelection(false); setShowAdminLogin(true); }}
+          onEmployeeClick={() => { setShowLoginSelection(false); setShowEmployeeLogin(true); }}
+          onInternClick={() => { setShowLoginSelection(false); setShowInternLogin(true); }}
+        />
       )}
+      {showAdminLogin && <AdminLoginModal onClose={() => setShowAdminLogin(false)} />}
+      {showEmployeeLogin && (
+        <EmployeeLoginModal
+          onClose={() => setShowEmployeeLogin(false)}
+          onRegisterClick={() => { setShowEmployeeLogin(false); setShowEmployeeRegister(true); }}
+        />
+      )}
+      {showInternLogin && (
+        <InternLoginModal
+          onClose={() => setShowInternLogin(false)}
+          onApplyClick={() => { setShowInternLogin(false); setShowInternApply(true); }}
+        />
+      )}
+      {showEmployeeRegister && (
+        <EmployeeRegisterModal
+          onClose={() => setShowEmployeeRegister(false)}
+          onLoginClick={() => { setShowEmployeeRegister(false); setShowEmployeeLogin(true); }}
+        />
+      )}
+      {showInternApply && (
+        <InternApplyModal
+          onClose={() => setShowInternApply(false)}
+          onLoginClick={() => { setShowInternApply(false); setShowInternLogin(true); }}
+        />
+      )}
+      {showApplyJob && <ApplyJobModal onClose={() => setShowApplyJob(false)} />}
+
+      {/* Internship Modals */}
+      {showPaidModal && <PaidInternshipModal onClose={() => setShowPaidModal(false)} />}
+      {showUnpaidModal && <UnpaidInternshipModal onClose={() => setShowUnpaidModal(false)} />}
     </div>
   );
 };
