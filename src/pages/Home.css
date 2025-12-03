@@ -313,6 +313,44 @@
   border-radius: 0;
 }
 
+@media (min-width: 992px) {
+  .hero-section {
+    height: auto;
+    /* Explicit height for desktop */
+    min-height: auto;
+  }
+
+  .hero-section .carousel,
+  .hero-section .carousel-inner,
+  .hero-section .carousel-item {
+    height: 100% !important;
+  }
+
+  .hero-section img {
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+}
+
+/* Desktop/Laptop exact fit adjustment */
+@media (min-width: 992px) {
+  .hero-section {
+    height: calc(100vh - 80px) !important;
+    min-height: 500px;
+  }
+
+  .hero-section .carousel,
+  .hero-section .carousel-inner,
+  .hero-section .carousel-item {
+    height: 100% !important;
+  }
+
+  .hero-section img {
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+}
+
 .hero-section .carousel {
   height: auto !important;
   min-height: auto;
@@ -340,8 +378,28 @@
   .hero-section {
     padding: 0;
     margin: 0;
-    min-height: 50vh;
-    /* Reduced from default */
+    min-height: 80vh;
+    height: 80vh !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  .hero-section .carousel,
+  .hero-section .carousel-inner,
+  .hero-section .carousel-item,
+  .hero-section .carousel-item.active {
+    height: 100% !important;
+    min-height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .hero-section img {
+    height: 100% !important;
+    min-height: 100% !important;
+    object-fit: cover !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
   .hero-content {
@@ -757,7 +815,7 @@ section {
 .about-section {
   background: var(--bg-primary);
   border-radius: 24px;
-  margin: -80px 0 16px 0;
+  margin: 0 0 16px 0;
   padding: 32px 8px;
   box-shadow: 0 10px 40px var(--shadow);
   position: relative;
@@ -2138,45 +2196,76 @@ textarea.form-control {
     font-size: 16px;
   }
 
-  .service-card {
-    padding: 12px;
+  .container {
+    padding: 0 12px;
   }
 
-  .service-image {
-    height: 150px;
+  section {
+    padding: 40px 12px;
   }
 
-  .service-short-desc {
-    font-size: 15px;
-    -webkit-line-clamp: 2;
+  .hero-buttons {
+    flex-direction: column;
+    gap: 16px;
+    padding: 0 12px;
   }
 
-  .service-full-desc {
-    -webkit-line-clamp: 2;
+  .btn {
+    width: 100%;
+    padding: 14px 24px;
+    font-size: 16px;
   }
 
-  .grow-box {
-    padding: 22px;
+  /* Adjust Page Header Back Button on Mobile */
+  .page-header {
+    flex-direction: row !important;
+    /* Keep it in a row */
+    gap: 10px;
+    margin-bottom: 12px;
   }
 
-  .owners-section .owner-card {
-    padding: 18px;
+  .page-header .section-title {
+    font-size: 24px;
+    margin-bottom: 0;
+    text-align: left;
   }
 
-  .stats-grid,
-  .tasks-grid,
-  .leave-requests-grid {
-    gap: 12px;
+  .page-header .btn {
+    width: auto;
+    /* Don't stretch full width */
+    padding: 8px 12px;
+    /* Smaller padding */
+    font-size: 18px;
+    /* Larger font for icon */
+    white-space: nowrap;
   }
 
-  .stat-card,
-  .task-card,
-  .leave-request-card {
-    padding: 14px;
+  .page-header .btn .btn-text,
+  .back-link .btn-text {
+    display: none !important;
   }
 
-  .table-container {
-    overflow-x: auto;
+  .about-content {
+    padding: 0 12px;
+  }
+
+  .about-section {
+    margin-top: 0 !important;
+  }
+
+  .tech-stack {
+    grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .tech-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .tech-name {
+    font-size: 12px;
   }
 }
 
@@ -2606,6 +2695,11 @@ textarea.form-control {
 
   .about-content {
     padding: 0 12px;
+  }
+
+  .about-section {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
   }
 
   .tech-stack {

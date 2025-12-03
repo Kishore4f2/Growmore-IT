@@ -59,3 +59,23 @@
     color: var(--primary);
     margin-top: 10px;
 }
+
+/* Custom Link Button Style */
+.btn-link {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    /* Using the variable from Home.css */
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+    text-decoration: none;
+    margin-left: 5px;
+    font-size: inherit;
+    transition: all 0.2s ease;
+}
+
+.btn-link:hover {
+    text-decoration: underline;
+    opacity: 0.8;
+}

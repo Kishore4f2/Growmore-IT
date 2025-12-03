@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { TypeAnimation } from 'react-type-animation';
+import { Carousel } from 'bootstrap';
 
 const slides = [
   {
@@ -26,9 +27,9 @@ const BootstrapHero = () => {
   const carouselRef = useRef(null);
 
   useEffect(() => {
-    if (carouselRef.current && window.bootstrap) {
-      const carousel = new window.bootstrap.Carousel(carouselRef.current, {
-        interval: 3000,
+    if (carouselRef.current) {
+      const carousel = new Carousel(carouselRef.current, {
+        interval: 2000,
         ride: 'carousel',
         touch: true,
         pause: false
@@ -68,7 +69,21 @@ const BootstrapHero = () => {
               <img src={s.image} className="d-block w-100" alt={s.title} style={{ objectFit: 'cover', height: '100%' }} />
             </picture>
 
-            <div className="carousel-caption" style={{ color: '#ffffff', textShadow: '0 2px 10px rgba(0,0,0,0.8)', zIndex: 2, bottom: '10%', left: '5%', right: '5%' }}>
+            <div className="carousel-caption" style={{
+              color: '#ffffff',
+              textShadow: '0 2px 10px rgba(0,0,0,0.8)',
+              zIndex: 2,
+              position: 'absolute',
+              top: 0,
+              bottom: 0,
+              left: 0,
+              right: 0,
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              paddingBottom: 0 // Override default bootstrap padding
+            }}>
               <h1 style={{ fontFamily: '\'Playfair Display\', serif', fontSize: 'clamp(2rem, 5vw, 4rem)', marginBottom: '1rem' }}>{s.title}</h1>
               <div style={{ fontFamily: '\'Poppins\', sans-serif', fontWeight: 500, fontSize: 'clamp(1rem, 2vw, 1.5rem)', marginBottom: '2rem', minHeight: '1.5em' }}>
                 <TypeAnimation
